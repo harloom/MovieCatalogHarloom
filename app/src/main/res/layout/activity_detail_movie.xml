@@ -1,24 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+<com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    android:layout_height="wrap_content">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_detail"
+        app:titleTextColor="@color/white"
+        android:background="@color/bluegrey"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.appbar.MaterialToolbar
+        android:elevation="0dp"
+        android:layout_height="@dimen/toolbar"/>
+
+</com.google.android.material.appbar.AppBarLayout>
+<ScrollView
+    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar"/>
+            android:layout_height="220dp"
+            android:orientation="horizontal"
+            android:background="#2B2D42"
+            android:padding="10dp"
+            >
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="5dp"
+                app:cardMaxElevation="2dp"
+                app:cardElevation="1dp"
+                android:background="@color/white"
+                app:cardCornerRadius="4dp"
+                android:layout_weight="1.5"
+                >
+                <ImageView
+                    android:id="@+id/dtl_thumbail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    />
 
-    </com.google.android.material.appbar.AppBarLayout>
-    <ScrollView
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:id="@+id/dtl_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="19sp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="3dp"
+                    android:textColor="@color/white"
+                    android:text="Title"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
+                    android:paddingStart="2dp"
+                    android:layout_marginBottom="3dp"
+                    android:paddingEnd="2dp"/>
+
+                <TextView
+                    android:id="@+id/dtl_tahun"
+                    android:layout_below="@id/dtl_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="3dp"
+                    android:textColor="@color/white"
+                    android:text="Subtile"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/dtl_release"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@android:color/black"
+            android:text="Genre"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
+        <TextView
+            android:id="@+id/dtl_genre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@android:color/black"
+            android:text="Genre"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/dtl_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
 
 
+    </LinearLayout>
 
-    </ScrollView>
+
+</ScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

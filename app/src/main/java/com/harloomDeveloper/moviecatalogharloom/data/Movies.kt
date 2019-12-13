@@ -144,7 +144,7 @@ class DataSourceMovie{
             thumbails = R.drawable.fate
         )
         )
-        return  movies;
+        return  movies
     }
 
 }

@@ -1,23 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MovieCatalogHarloom</string>
-    <string name="title_activity_menu">MenuActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_movie">Film</string>
-    <string name="title_tv">Televisi</string>
-
-    <string name="title_detail">%1$s %2$s</string>
-    <string name="title_status">Status : %1$s</string>
+    <string name="title_activity_menu">Menu</string>
     <string name="title_change_language">Change Language Settings</string>
-    <string name="title" translatable="false">Title</string>
-    <string name="subtile" translatable="false">Subtile</string>
-
-
-
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_detail">%1$s %2$s</string>
+    <string name="title_home">Home Page</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_status">Status : %1$s</string>
+    <string name="title_tv">Tv Show</string>
     <string name="bat_woman">Kate Kane, armed with a passion for social justice and a flair for speaking her mind, soars onto the streets of Gotham as Batwoman, an out lesbian and highly trained street fighter primed to snuff out the failing city\'s criminal resurgence. But don\'t call her a hero yet. In a city desperate for a savior, Kate must overcome her own demons before embracing the call to be Gotham\'s symbol of hope</string>
     <string name="status1">Returning Series</string>
     <string name="final_space">An astronaut named Gary and his planet-destroying sidekick Mooncake embark on serialized journeys through space in order to unlock the mystery of “Final Space,” the last point in the universe, if it actually does exist.</string>
-    <string name="assasin_pride">In the world only the aristocrats have the power to fight the monster - mana. Even though Melida Angel was born in an aristocracy and studies at an academy developing mana users, she has no mana. To find her talent for mana, Kufa Vampir was sent to be her tutor but at the same time, he was ordered to assassinate her if she has no talent for mana. He makes a cruel decision to assassinate her because he thinks that it is a wasted effort that people who have not any mana are working hard in this world… However, he asks her, \"Do you want to try to entrust your life to me?\" He is not as an assassin nor a tutor. He is someone betting on his pride as an assassin tutor, to show the world what Melida is capable of!</string>
+    <string name="assasin_pride">In the world only the aristocrats have the power to fight the monster - mana. Even though Melida Angel was born in an aristocracy and studies at an academy developing mana users, she has no mana. To find her talent for mana, Kufa Vampir was sent to be her tutor but at the same time, he was ordered to assassinate her if she has no talent for mana. He makes a cruel decision to assassinate her because he thinks that it is a wasted effort that people who have not any mana are working hard in this world... However, he asks her, \"Do you want to try to entrust your life to me?\" He is not as an assassin nor a tutor. He is someone betting on his pride as an assassin tutor, to show the world what Melida is capable of!</string>
     <string name="euphoria">A group of high school students navigate love and friendships in a world of drugs, sex, trauma, and social media.</string>
     <string name="servant">A Philadelphia couple are in mourning after an unspeakable tragedy creates a rift in their marriage and opens the door for a mysterious force to enter their home.</string>
     <string name="thel">In this sequel to The L Word, we continue to follow the intermingled lives of Bette Porter, Alice Pieszecki and Shane McCutcheon, along with a new generation of diverse, self-possessed LGBTQIA+ characters experiencing love, heartbreak, sex, setbacks and success in L.A.</string>
@@ -26,6 +21,4 @@
     <string name="farm">Fed up with her father, a woman moves in with her older half-sister, and her fiancé.</string>
     <string name="goodOmens">Aziraphale, an angel, and Crowley, a demon, join forces to find the Antichrist and stop Armageddon.</string>
     <string name="status2">Ended</string>
-
-
 </resources>

@@ -20,7 +20,7 @@ data class Movies(
 ) : Parcelable
 
 
-class DataSource{
+class DataSourceMovie{
     private  val  movies : MutableList<Movies> = mutableListOf()
 
     fun getListMovide() : List<Movies>{

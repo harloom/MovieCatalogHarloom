@@ -30,7 +30,7 @@ class DetailTvShowActivity : AppCompatActivity() {
         dtl_genre.text =getGenre(item)
         dtl_summary.text = item.desc
         dtl_tahun.text = item.tahunRilis
-        dtl_release.text = String.format(getString(R.string.title_status),item.tahunRilis)
+        dtl_release.text = String.format(getString(R.string.title_status),item.status)
         dtl_thumbail.setImageResource(item.thumbails!!)
     }
 

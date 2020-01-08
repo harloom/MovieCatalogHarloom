@@ -22,38 +22,39 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
     android:layout_width="match_parent"
     android:fillViewport="true"
-    android:layout_height="wrap_content">
+    android:background="@color/bluegrey"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_poster"
+        <View
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/background_detail"
+            app:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/dtl_thumbail"
+            android:layout_width="150dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:layout_weight="1.5"
-            android:background="@color/white"
-            app:cardBackgroundColor="@color/bluegrey"
-            app:cardCornerRadius="0dp"
-            app:cardElevation="1dp"
-            app:cardMaxElevation="2dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/poster_venom"
             app:layout_constraintBottom_toTopOf="@+id/dtl_tahun"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/dtl_thumbail"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/poster_venom" />
 
-        </androidx.cardview.widget.CardView>
 
 
         <TextView
@@ -61,19 +62,18 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:background="@color/bluegrey"
             android:gravity="center"
             android:paddingStart="8dp"
             android:paddingTop="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/dtl_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_poster" />
+            app:layout_constraintTop_toBottomOf="@+id/dtl_thumbail" />
 
         <TextView
             android:id="@+id/dtl_title"

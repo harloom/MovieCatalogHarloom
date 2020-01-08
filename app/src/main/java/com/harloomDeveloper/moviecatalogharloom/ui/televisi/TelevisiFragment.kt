@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.harloomDeveloper.moviecatalogharloom.DetailTvShowActivity
 import com.harloomDeveloper.moviecatalogharloom.R
-import com.harloomDeveloper.moviecatalogharloom.RcvTvAdapter
+import com.harloomDeveloper.moviecatalogharloom.adapter.RcvTvAdapter
 import com.harloomDeveloper.moviecatalogharloom.data.DataSourceTV
 import com.harloomDeveloper.moviecatalogharloom.data.TvShow
 import com.harloomDeveloper.moviecatalogharloom.utils

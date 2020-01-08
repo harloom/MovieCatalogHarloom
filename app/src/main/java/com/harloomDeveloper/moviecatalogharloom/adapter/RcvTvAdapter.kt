@@ -1,4 +1,4 @@
-package com.harloomDeveloper.moviecatalogharloom
+package com.harloomDeveloper.moviecatalogharloom.adapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
@@ -7,19 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import com.harloomDeveloper.moviecatalogharloom.data.Movies
+import com.harloomDeveloper.moviecatalogharloom.R
+import com.harloomDeveloper.moviecatalogharloom.data.TvShow
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class RcvMovieAdapter(private val interaction: Interaction? = null) :
+class RcvTvAdapter(private val interaction: Interaction? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movies>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShow>() {
 
-        override fun areItemsTheSame(oldItem: Movies, newItem: Movies): Boolean {
+        override fun areItemsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
             return  oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Movies, newItem: Movies): Boolean {
+        override fun areContentsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
            return oldItem==newItem
         }
 
@@ -31,7 +32,7 @@ class RcvMovieAdapter(private val interaction: Interaction? = null) :
 
         return MovieHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_movie,
+                R.layout.item_tv_show,
                 parent,
                 false
             ),
@@ -51,7 +52,7 @@ class RcvMovieAdapter(private val interaction: Interaction? = null) :
         return differ.currentList.size
     }
 
-    fun submitList(list: List<Movies>) {
+    fun submitList(list: List<TvShow>) {
         differ.submitList(list)
     }
 
@@ -62,7 +63,7 @@ class RcvMovieAdapter(private val interaction: Interaction? = null) :
     ) : RecyclerView.ViewHolder(itemView) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(item: Movies) = with(itemView) {
+        fun bind(item: TvShow) = with(itemView) {
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
 
@@ -75,7 +76,7 @@ class RcvMovieAdapter(private val interaction: Interaction? = null) :
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: Movies)
+        fun onItemSelected(position: Int, item: TvShow)
     }
 }
 

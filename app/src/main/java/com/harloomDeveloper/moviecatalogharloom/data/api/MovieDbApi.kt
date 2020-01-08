@@ -1,6 +1,7 @@
 package com.harloomDeveloper.moviecatalogharloom.data.api
 
 import android.util.Log
+import com.harloomDeveloper.moviecatalogharloom.data.models.movie.Movie
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -8,6 +9,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 import java.util.*
 
 
@@ -18,7 +21,7 @@ object NetworkBuilder {
         Retrofit.Builder()
             .baseUrl(Constant.BASE_URL)
             .client(OkHttpClient.Builder()
-                .addInterceptor(RequestService() )
+                    .addInterceptor(RequestService() )
                 .addInterceptor (LogNetwork())
                 .build())
             .addConverterFactory(GsonConverterFactory.create())
@@ -53,9 +56,12 @@ class RequestService : Interceptor{
 }
 
 interface MovieApi{
-    @GET("")
-    suspend fun getMovie(
+    @GET("movie/now_playing")
+    suspend fun getMovie(@Query("page") page : Int) : retrofit2.Response<Movie>
 
+    @GET("movie/{id}")
+    suspend fun getDetailMovie(
+        @Path("id") id : String
     )
 
     @GET("")

@@ -1,37 +1,29 @@
-package com.harloomDeveloper.moviecatalogharloom
+package com.harloomDeveloper.moviecatalogharloom.adapter
 
-import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import com.harloomDeveloper.moviecatalogharloom.data.TvShow
+import com.bumptech.glide.Glide
+import com.harloomDeveloper.moviecatalogharloom.R
+import com.harloomDeveloper.moviecatalogharloom.data.api.Constant
+import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class RcvTvAdapter(private val interaction: Interaction? = null) :
+class RcvMovieAdapter(private val interaction: Interaction? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShow>() {
-
-        override fun areItemsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
-            return  oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
-           return oldItem==newItem
-        }
-
+    private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ResultMovie>() {
+        override fun areItemsTheSame(oldItem: ResultMovie, newItem: ResultMovie): Boolean = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: ResultMovie, newItem: ResultMovie): Boolean = oldItem==newItem
     }
     private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
         return MovieHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_tv_show,
+                R.layout.item_movie,
                 parent,
                 false
             ),
@@ -51,7 +43,7 @@ class RcvTvAdapter(private val interaction: Interaction? = null) :
         return differ.currentList.size
     }
 
-    fun submitList(list: List<TvShow>) {
+    fun submitList(list: List<ResultMovie>) {
         differ.submitList(list)
     }
 
@@ -60,22 +52,26 @@ class RcvTvAdapter(private val interaction: Interaction? = null) :
         itemView: View,
         private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
-
-        @SuppressLint("SetTextI18n")
-        fun bind(item: TvShow) = with(itemView) {
+        fun bind(item: ResultMovie) = with(itemView) {
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
+            }
+            itemView.tv_title.text = item.title
+            itemView.tv_tahun.text = item.releaseDate
+//            itemView.thumbail.setImageResource(item.!!)
+            try {
+                Glide.with(context)
+                    .load(Constant.BASE_IMAGE+item.posterPath)
+                    .into(itemView.thumbail)
+            }catch (e : Exception){
 
             }
 
-            itemView.tv_title.text = item.title
-            itemView.tv_tahun.text = "(${item.tahunRilis})"
-            itemView.thumbail.setImageResource(item.thumbails!!)
         }
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: TvShow)
+        fun onItemSelected(position: Int, item: ResultMovie)
     }
 }
 

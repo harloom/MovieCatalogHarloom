@@ -47,9 +47,10 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
+            android:background="@drawable/background_thumbail"
             android:scaleType="centerCrop"
             android:src="@drawable/poster_venom"
-            app:layout_constraintBottom_toTopOf="@+id/dtl_tahun"
+            app:layout_constraintBottom_toTopOf="@+id/dtl_popularity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +59,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
         <TextView
-            android:id="@+id/dtl_tahun"
+            android:id="@+id/dtl_popularity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -92,7 +93,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintBottom_toTopOf="@+id/dtl_release"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dtl_tahun" />
+            app:layout_constraintTop_toBottomOf="@+id/dtl_popularity" />
 
         <TextView
             android:id="@+id/dtl_release"
@@ -111,13 +112,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:textColor="@android:color/black"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/dtl_genre"
+            app:layout_constraintBottom_toTopOf="@+id/dtl_rating"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dtl_title" />
 
         <TextView
-            android:id="@+id/dtl_genre"
+            android:id="@+id/dtl_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -142,7 +143,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
             android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@+id/dtl_genre" />
+            app:layout_constraintTop_toBottomOf="@+id/dtl_rating" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

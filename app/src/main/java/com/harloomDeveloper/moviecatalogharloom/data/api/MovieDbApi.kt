@@ -2,6 +2,7 @@ package com.harloomDeveloper.moviecatalogharloom.data.api
 
 import android.util.Log
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.Movie
+import com.harloomDeveloper.moviecatalogharloom.data.models.tv.TvShow
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -21,7 +22,7 @@ object NetworkBuilder {
         Retrofit.Builder()
             .baseUrl(Constant.BASE_URL)
             .client(OkHttpClient.Builder()
-                    .addInterceptor(RequestService() )
+                .addInterceptor(RequestService() )
                 .addInterceptor (LogNetwork())
                 .build())
             .addConverterFactory(GsonConverterFactory.create())
@@ -30,14 +31,10 @@ object NetworkBuilder {
     private fun LogNetwork(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-
         return interceptor
     }
-
     val apiService: MovieApi by lazy {
-        retfoit
-            .build()
-            .create(MovieApi::class.java)
+        retfoit.build().create(MovieApi::class.java)
     }
 }
 
@@ -49,7 +46,6 @@ class RequestService : Interceptor{
             .addQueryParameter("language", Locale.getDefault().language)
             .build()
         request = request.newBuilder().url(url).build()
-
         return chain.proceed(request)
     }
 
@@ -64,9 +60,9 @@ interface MovieApi{
         @Path("id") id : String
     )
 
-    @GET("")
+    @GET("tv/airing_today")
     suspend fun getTv(
-
-    )
+        @Query("page") page : Int
+    ): retrofit2.Response<TvShow>
 
 }

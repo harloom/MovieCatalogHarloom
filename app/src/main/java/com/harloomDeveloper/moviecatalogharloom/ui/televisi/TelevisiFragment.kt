@@ -7,19 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.harloomDeveloper.moviecatalogharloom.DetailTvShowActivity
+import com.harloomDeveloper.moviecatalogharloom.MainViewModel
 import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.adapter.RcvTvAdapter
 import com.harloomDeveloper.moviecatalogharloom.data.DataSourceTV
-import com.harloomDeveloper.moviecatalogharloom.data.TvShow
+import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
 import com.harloomDeveloper.moviecatalogharloom.utils
+import kotlinx.android.synthetic.main.fragment_tv.*
 
 class TelevisiFragment : Fragment() {
 
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mListTvShow: List<TvShow>
     private lateinit var mTvadapter: RcvTvAdapter
+    private var vm : MainViewModel? =null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,30 +39,46 @@ class TelevisiFragment : Fragment() {
     }
 
     private fun initRcv() {
-        mTvadapter.submitList(mListTvShow)
         mRecyclerView.apply {
             adapter = mTvadapter
         }
+
+        vm?.getTvList(1)?.observe(this@TelevisiFragment, Observer {
+            it?.let {
+                showLoading(false)
+                mTvadapter.submitList(it.resultTv)
+            }
+        })
+
     }
 
 
     private fun init(){
         mRecyclerView = view!!.findViewById(R.id.rcv_tv)
-        mListTvShow = DataSourceTV().getListTv(context!!)
+        vm = ViewModelProviders.of(activity!!)[MainViewModel::class.java]
+        showLoading(true)
         mTvadapter = RcvTvAdapter(callbackAdaptet)
     }
 
     private  val   callbackAdaptet : RcvTvAdapter.Interaction = object :
         RcvTvAdapter.Interaction {
-        override fun onItemSelected(position: Int, item: TvShow) {
+        override fun onItemSelected(position: Int, item: ResultTv) {
             startActivity(getIntentToDetail(context,item))
         }
     }
 
-    private  fun getIntentToDetail(context: Context?, item: TvShow): Intent {
+    private  fun getIntentToDetail(context: Context?, item: ResultTv): Intent {
         val intent = Intent(context, DetailTvShowActivity::class.java)
         intent.putExtra(utils.KEY_TvShow,item)
         return  intent
 
+    }
+
+    private fun showLoading(st : Boolean){
+        if(st){
+            loading_indicator.visibility = View.VISIBLE
+        }else{
+            loading_indicator.visibility = View.GONE
+        }
     }
 }

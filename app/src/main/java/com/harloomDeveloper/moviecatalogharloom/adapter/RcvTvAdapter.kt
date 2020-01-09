@@ -7,20 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import com.bumptech.glide.Glide
 import com.harloomDeveloper.moviecatalogharloom.R
-import com.harloomDeveloper.moviecatalogharloom.data.TvShow
+import com.harloomDeveloper.moviecatalogharloom.data.api.Constant
+import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
 import kotlinx.android.synthetic.main.item_movie.view.*
+import kotlinx.android.synthetic.main.item_movie.view.thumbail
+import kotlinx.android.synthetic.main.item_movie.view.tv_tahun
+import kotlinx.android.synthetic.main.item_movie.view.tv_title
+import kotlinx.android.synthetic.main.item_tv_show.view.*
 
 class RcvTvAdapter(private val interaction: Interaction? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShow>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ResultTv>() {
 
-        override fun areItemsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
+        override fun areItemsTheSame(oldItem: ResultTv, newItem: ResultTv): Boolean {
             return  oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
+        override fun areContentsTheSame(oldItem: ResultTv, newItem: ResultTv): Boolean {
            return oldItem==newItem
         }
 
@@ -52,7 +58,7 @@ class RcvTvAdapter(private val interaction: Interaction? = null) :
         return differ.currentList.size
     }
 
-    fun submitList(list: List<TvShow>) {
+    fun submitList(list: List<ResultTv>) {
         differ.submitList(list)
     }
 
@@ -63,20 +69,30 @@ class RcvTvAdapter(private val interaction: Interaction? = null) :
     ) : RecyclerView.ViewHolder(itemView) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(item: TvShow) = with(itemView) {
+        fun bind(item: ResultTv) = with(itemView) {
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
 
             }
 
-            itemView.tv_title.text = item.title
-            itemView.tv_tahun.text = "(${item.tahunRilis})"
-            itemView.thumbail.setImageResource(item.thumbails!!)
+            itemView.tv_title.text = item.originalName
+            itemView.tv_tahun.text = item.firstAirDate
+            try {
+                Glide.with(itemView.context)
+                    .load(Constant.BASE_IMAGE + item.posterPath)
+                    .into(itemView.thumbail)
+            }catch (e : Exception)
+            {
+
+            }
         }
+
+
+
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: TvShow)
+        fun onItemSelected(position: Int, item: ResultTv)
     }
 }
 

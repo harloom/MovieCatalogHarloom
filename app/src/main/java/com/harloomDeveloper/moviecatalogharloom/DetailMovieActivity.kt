@@ -20,7 +20,7 @@ class DetailMovieActivity : AppCompatActivity() {
         supportActionBar?.title = "Detail"
 
         val data = intent.getParcelableExtra<ResultMovie>(utils.KEY_MOVIE)
-        data.let {
+        data?.let {
             initUI(it)
         }
 

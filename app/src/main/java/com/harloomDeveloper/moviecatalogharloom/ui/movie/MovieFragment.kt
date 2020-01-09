@@ -69,7 +69,7 @@ class MovieFragment : Fragment() {
     private  val   callbackAdaptet : RcvMovieAdapter.Interaction = object :
         RcvMovieAdapter.Interaction {
         override fun onItemSelected(position: Int, item: ResultMovie) {
-//            startActivity(getIntentToDetail(context,item))
+            startActivity(getIntentToDetail(context,item))
         }
     }
 

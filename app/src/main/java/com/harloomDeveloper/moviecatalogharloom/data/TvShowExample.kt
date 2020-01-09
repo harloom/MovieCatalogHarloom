@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-data class TvShow(
+data class TvShowExample(
     val id : String,
      val title: String,
      val desc: String,
@@ -22,11 +22,11 @@ data class TvShow(
 
 
 class DataSourceTV{
-    private  val  tv : MutableList<TvShow> = mutableListOf()
+    private  val  tv : MutableList<TvShowExample> = mutableListOf()
 
-    fun getListTv(context: Context) : List<TvShow>{
+    fun getListTv(context: Context) : List<TvShowExample>{
         //1
-        tv.add(TvShow(
+        tv.add(TvShowExample(
             id = "#1",
             title = "Batwoman",
             desc = context.getString(R.string.bat_woman),
@@ -38,7 +38,7 @@ class DataSourceTV{
          )
         )
         //2
-        tv.add(TvShow(
+        tv.add(TvShowExample(
             id = "#2",
             title = "Final Space",
             desc = context.getString(R.string.final_space),
@@ -51,7 +51,7 @@ class DataSourceTV{
         )
 
         //3
-        tv.add(TvShow(
+        tv.add(TvShowExample(
             id = "#3",
             title = "Assassins Pride ",
             desc = context.getString(R.string.assasin_pride),
@@ -64,7 +64,7 @@ class DataSourceTV{
         )
 
         //4
-        tv.add(TvShow(
+        tv.add(TvShowExample(
             id = "#4",
             title = "Euphoria",
             desc = context.getString(R.string.euphoria),
@@ -77,7 +77,7 @@ class DataSourceTV{
         )
 
         //5
-        tv.add(TvShow(
+        tv.add(TvShowExample(
             id = "#5",
             title = "Servant",
             desc = context.getString(R.string.servant),
@@ -90,7 +90,7 @@ class DataSourceTV{
         )
 
         //6
-        tv.add(TvShow(
+        tv.add(TvShowExample(
             id = "#6",
             title = "The L Word: Generation Q",
             desc = context.getString(R.string.thel),
@@ -103,7 +103,7 @@ class DataSourceTV{
         )
 
         //7
-        tv.add(TvShow(
+        tv.add(TvShowExample(
             id = "#7",
             title = "Dr. Stone",
             desc = context.getString(R.string.dr_stone),
@@ -116,7 +116,7 @@ class DataSourceTV{
         )
 
         //8
-        tv.add(TvShow(
+        tv.add(TvShowExample(
             id = "#8",
             title = "Fate/Grand Order Absolute Demonic Front: Babylonia",
             desc = context.getString(R.string.fgo),
@@ -130,7 +130,7 @@ class DataSourceTV{
 
         //9
 
-        tv.add(TvShow(
+        tv.add(TvShowExample(
             id = "#9",
             title = "Fam",
             desc = context.getString(R.string.farm),
@@ -143,7 +143,7 @@ class DataSourceTV{
         )
 
         //10
-        tv.add(TvShow(
+        tv.add(TvShowExample(
             id = "#10",
             title = "Good Omens",
             desc = context.getString(R.string.goodOmens),

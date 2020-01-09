@@ -12,11 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
-import com.harloomDeveloper.moviecatalogharloom.DetailMovieActivity
 import com.harloomDeveloper.moviecatalogharloom.MainViewModel
 import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.adapter.RcvMovieAdapter
-import com.harloomDeveloper.moviecatalogharloom.data.models.movie.Movie
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
 import com.harloomDeveloper.moviecatalogharloom.utils
 import kotlinx.android.synthetic.main.fragment_movie.*

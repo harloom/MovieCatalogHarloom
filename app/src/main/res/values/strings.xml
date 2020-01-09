@@ -29,7 +29,7 @@
 
 
     <string name="api_key_v3" translatable="false">681b436ab539d57c9768f90081fc936b</string>
-
+    <string name="title_rating">Ratings : %1$s</string>
 
 
 </resources>

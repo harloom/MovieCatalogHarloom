@@ -40,10 +40,19 @@ object NetworkBuilder {
 
 class RequestService : Interceptor{
     override fun intercept(chain: Interceptor.Chain): Response {
+
+        val code = when(Locale.getDefault().language){
+            "in"->{
+                "id"
+            }else->{
+                "en-US"
+            }
+        }
+
         var request  = chain.request()
         val url = request.url.newBuilder()
             .addQueryParameter("api_key", Constant.KEY_API)
-            .addQueryParameter("language", Locale.getDefault().language)
+            .addQueryParameter("language", code)
             .build()
         request = request.newBuilder().url(url).build()
         return chain.proceed(request)
@@ -65,4 +74,9 @@ interface MovieApi{
         @Query("page") page : Int
     ): retrofit2.Response<TvShow>
 
+
+    @GET("tv/{id}")
+    suspend fun getDetailTv(
+        @Path("id") id : String
+    )
 }

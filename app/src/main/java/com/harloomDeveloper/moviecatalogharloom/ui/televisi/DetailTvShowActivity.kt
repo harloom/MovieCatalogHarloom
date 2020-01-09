@@ -1,11 +1,12 @@
-package com.harloomDeveloper.moviecatalogharloom
+package com.harloomDeveloper.moviecatalogharloom.ui.televisi
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
+import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.data.api.Constant
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
+import com.harloomDeveloper.moviecatalogharloom.utils
 
 import kotlinx.android.synthetic.main.activity_detail_tv.*
 
@@ -27,9 +28,9 @@ class DetailTvShowActivity : AppCompatActivity() {
     }
 
     private fun initUI(item : ResultTv){
-        dtl_title.text =  String.format(getString(R.string.title_detail),item.id,item.name)
+        dtl_title.text = item.originalName
         dtl_summary.text = item.overview
-        dtl_popularity.text = item.popularity.toString()
+        dtl_popularity.text = String.format(getString(R.string.title_rating),item.voteAverage)
         dtl_release.text = item.firstAirDate
 
         try {

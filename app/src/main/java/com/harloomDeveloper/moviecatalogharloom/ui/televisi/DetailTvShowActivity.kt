@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.data.api.Constant
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
-import com.harloomDeveloper.moviecatalogharloom.utils
+import com.harloomDeveloper.moviecatalogharloom.Utils
 
 import kotlinx.android.synthetic.main.activity_detail_tv.*
 
@@ -22,7 +22,7 @@ class DetailTvShowActivity : AppCompatActivity() {
 
 
 
-        val data = intent.getParcelableExtra<ResultTv>(utils.KEY_TvShow)
+        val data = intent.getParcelableExtra<ResultTv>(Utils.KEY_TvShow)
         data?.let { initUI(it) }
 
     }

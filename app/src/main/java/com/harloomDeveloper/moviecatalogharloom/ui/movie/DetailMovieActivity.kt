@@ -7,12 +7,14 @@ import com.bumptech.glide.Glide
 import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.data.api.Constant
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
-import com.harloomDeveloper.moviecatalogharloom.utils
+import com.harloomDeveloper.moviecatalogharloom.Utils
 
 import kotlinx.android.synthetic.main.activity_detail_movie.*
 
 class DetailMovieActivity : AppCompatActivity() {
 
+
+    private var data : ResultMovie?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_movie)
@@ -21,14 +23,18 @@ class DetailMovieActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = "Detail"
 
-        val data = intent.getParcelableExtra<ResultMovie>(utils.KEY_MOVIE)
+
+
+
+
+        data = intent.getParcelableExtra<ResultMovie>(Utils.KEY_MOVIE)
         data?.let {
             initUI(it)
         }
 
     }
 
-    @SuppressLint("SetTextI18n")
+
     private fun initUI(item : ResultMovie){
 //        dtl_title.text =  String.format(getString(R.string.title_detail),item.id,item.title)
 //        dtl_genre.text =getGenre(item)
@@ -46,6 +52,14 @@ class DetailMovieActivity : AppCompatActivity() {
 
         }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+//        data?.let {
+//            outState.putParcelable(Utils.KEY_STATE_ITEM,data)
+//        }
+        super.onSaveInstanceState(outState)
+    }
+
 
     private fun  getGenre (item: ResultMovie): String {
         var genre : String= ""

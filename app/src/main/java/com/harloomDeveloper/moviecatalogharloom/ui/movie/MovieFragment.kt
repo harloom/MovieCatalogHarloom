@@ -16,7 +16,7 @@ import com.harloomDeveloper.moviecatalogharloom.MainViewModel
 import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.adapter.RcvMovieAdapter
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
-import com.harloomDeveloper.moviecatalogharloom.utils
+import com.harloomDeveloper.moviecatalogharloom.Utils
 import kotlinx.android.synthetic.main.fragment_movie.*
 
 class MovieFragment : Fragment() {
@@ -42,7 +42,7 @@ class MovieFragment : Fragment() {
         mRecyclerView.apply {
             adapter = movieAdapter
         }
-        vm?.getMovieList(1)?.observe(this@MovieFragment, Observer {
+        vm?.getDataMovie()?.observe(this@MovieFragment, Observer {
             it?.let {
                 showLoading(false)
                 movieAdapter.submitList(it.resultMovies)
@@ -57,6 +57,7 @@ class MovieFragment : Fragment() {
         //initializevieModel
         mRecyclerView = view!!.findViewById(R.id.rcv_movies)
         vm = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
+        vm?.setPageMovie(1)
         showLoading(true)
         movieAdapter =
             RcvMovieAdapter(callbackAdaptet)
@@ -73,10 +74,12 @@ class MovieFragment : Fragment() {
 
     private  fun getIntentToDetail(context: Context?,item: ResultMovie): Intent {
         val intent = Intent(context, DetailMovieActivity::class.java)
-        intent.putExtra(utils.KEY_MOVIE,item)
+        intent.putExtra(Utils.KEY_MOVIE,item)
         return  intent
 
     }
+
+
 
     private fun showLoading(st : Boolean){
         if(st){

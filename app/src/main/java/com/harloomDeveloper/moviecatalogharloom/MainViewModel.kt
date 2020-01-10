@@ -1,6 +1,7 @@
 package com.harloomDeveloper.moviecatalogharloom
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.harloomDeveloper.moviecatalogharloom.data.api.NetworkBuilder
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.Movie
@@ -13,18 +14,19 @@ class MainViewModel : ViewModel() {
     var api = NetworkBuilder.apiService
     var jobLoaded : CompletableJob? =null
 
+    private val listMovie : MutableLiveData<Movie> = MutableLiveData()
+    private val listTv : MutableLiveData<TvShow> = MutableLiveData()
+    fun getDataMovie() : LiveData<Movie> =  listMovie
+    fun getDataTv() : LiveData<TvShow> = listTv
 
-     fun getMovieList(page : Int) : LiveData<Movie?> {
+     fun setPageMovie(page : Int) {
         jobLoaded = Job()
-        return  object : LiveData<Movie?>() {
-            override fun onActive() {
-                super.onActive()
                 jobLoaded?.let {
                     CoroutineScope(IO + it).launch {
                         val response =   api.getMovie(page)
                         if(response.isSuccessful){
                             withContext(Main){
-                                value = response.body()
+                                 listMovie.value = response.body()
                                 jobLoaded?.complete()
                             }
                         }else{
@@ -36,21 +38,17 @@ class MainViewModel : ViewModel() {
                 }
             }
 
-        }
-    }
 
 
-    fun getTvList(page : Int) : LiveData<TvShow?>{
+
+    fun setPageTv(page : Int){
         jobLoaded = Job()
-        return  object : LiveData<TvShow?>() {
-            override fun onActive() {
-                super.onActive()
                 jobLoaded?.let {
                     CoroutineScope(IO + it).launch {
                         val response =   api.getTv(page)
                         if(response.isSuccessful){
                             withContext(Main){
-                                value = response.body()
+                                listTv.value = response.body()
                                 jobLoaded?.complete()
                             }
                         }else{
@@ -60,9 +58,8 @@ class MainViewModel : ViewModel() {
 
                     }
                 }
-            }
 
-        }
+
     }
 
     fun cancel(){

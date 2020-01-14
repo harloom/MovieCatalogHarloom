@@ -13,7 +13,6 @@
     <string name="subtile" translatable="false">Subtile</string>
 
 
-
     <string name="bat_woman">Kate Kane, armed with a passion for social justice and a flair for speaking her mind, soars onto the streets of Gotham as Batwoman, an out lesbian and highly trained street fighter primed to snuff out the failing city\'s criminal resurgence. But don\'t call her a hero yet. In a city desperate for a savior, Kate must overcome her own demons before embracing the call to be Gotham\'s symbol of hope</string>
     <string name="status1">Returning Series</string>
     <string name="final_space">An astronaut named Gary and his planet-destroying sidekick Mooncake embark on serialized journeys through space in order to unlock the mystery of “Final Space,” the last point in the universe, if it actually does exist.</string>
@@ -30,6 +29,9 @@
 
     <string name="api_key_v3" translatable="false">681b436ab539d57c9768f90081fc936b</string>
     <string name="title_rating">Ratings : %1$s</string>
+    <string name="title_activity_favorit">Favorit</string>
+    <string name="tab_text_1">Movie</string>
+    <string name="tab_text_2">Tv</string>
 
 
 </resources>

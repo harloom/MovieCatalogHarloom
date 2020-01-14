@@ -22,4 +22,7 @@
     <string name="goodOmens">Aziraphale, an angel, and Crowley, a demon, join forces to find the Antichrist and stop Armageddon.</string>
     <string name="status2">Ended</string>
     <string name="title_rating">Ratings :  %1$s</string>
+    <string name="tab_text_1">Movie</string>
+    <string name="tab_text_2">Tv</string>
+    <string name="title_activity_favorit">Favorit</string>
 </resources>

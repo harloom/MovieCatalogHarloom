@@ -2,9 +2,12 @@ package com.harloomDeveloper.moviecatalogharloom.data.models.tv
 
 
 import android.os.Parcelable
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
+import com.harloomDeveloper.moviecatalogharloom.data.local.database.CatalogDatabase.Companion.TV_TABLE
 import kotlinx.android.parcel.Parcelize
 
+@Entity(tableName = TV_TABLE)
 @Parcelize
 data class ResultTv(
     @SerializedName("backdrop_path")

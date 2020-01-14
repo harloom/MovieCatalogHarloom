@@ -22,4 +22,7 @@
     <string name="status2">Selesai</string>
     <string name="goodOmens">Aziraphale, malaikat, dan Crowley, iblis, bergabung untuk menemukan Antikristus dan menghentikan Armageddon.</string>
     <string name="title_rating">Peringkat :  %1$s</string>
+    <string name="tab_text_1">Film</string>
+    <string name="tab_text_2">Tv</string>
+    <string name="title_activity_favorit">Favorit</string>
 </resources>

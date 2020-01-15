@@ -43,7 +43,7 @@
         android:src="@drawable/ic_favorite"
         android:layout_marginBottom="24dp"
         app:tint="@color/white"
-        app:elevation=""
+        app:elevation="0dp"
         app:backgroundTint="@color/bluegrey"
         app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent" />

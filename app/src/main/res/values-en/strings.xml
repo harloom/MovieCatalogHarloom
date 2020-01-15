@@ -25,4 +25,5 @@
     <string name="tab_text_1">Movie</string>
     <string name="tab_text_2">Tv</string>
     <string name="title_activity_favorit">Favorit</string>
+    <string name="poster">Poster</string>
 </resources>

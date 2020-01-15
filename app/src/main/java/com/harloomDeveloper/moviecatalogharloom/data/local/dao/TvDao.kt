@@ -1,6 +1,7 @@
 package com.harloomDeveloper.moviecatalogharloom.data.local.dao
 
 import androidx.lifecycle.LiveData
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -17,4 +18,7 @@ interface TvDao {
 
     @Query("DELETE FROM tv_table")
     fun deleteAll()
+
+    @Delete
+    fun delete(movie: ResultTv)
 }

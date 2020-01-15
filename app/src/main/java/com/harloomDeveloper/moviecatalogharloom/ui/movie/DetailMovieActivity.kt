@@ -8,6 +8,8 @@ import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.data.api.Constant
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
 import com.harloomDeveloper.moviecatalogharloom.Utils
+import com.like.LikeButton
+import com.like.OnLikeListener
 
 import kotlinx.android.synthetic.main.activity_detail_movie.*
 
@@ -22,11 +24,6 @@ class DetailMovieActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = "Detail"
-
-
-
-
-
         data = intent.getParcelableExtra<ResultMovie>(Utils.KEY_MOVIE)
         data?.let {
             initUI(it)
@@ -44,10 +41,23 @@ class DetailMovieActivity : AppCompatActivity() {
         dtl_vote.text = String.format(getString(R.string.title_rating),item.voteAverage)
 //        dtl_thumbail.setImageResource(item.thumbails!!)
 
+
+        favorit_button.setOnLikeListener(object  : OnLikeListener{
+            override fun liked(likeButton: LikeButton?) {
+//                favorit_button.isLiked = true
+            }
+
+            override fun unLiked(likeButton: LikeButton?) {
+//                favorit_button.isLiked = false
+            }
+
+        })
         try {
             Glide.with(this@DetailMovieActivity)
                 .load(Constant.BASE_IMAGE+item.posterPath)
                 .into(dtl_thumbail)
+
+
         }catch (e : Exception){
 
         }

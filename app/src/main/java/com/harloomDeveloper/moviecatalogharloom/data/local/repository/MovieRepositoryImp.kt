@@ -1,38 +1,45 @@
 package com.harloomDeveloper.moviecatalogharloom.data.local.repository
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import com.harloomDeveloper.moviecatalogharloom.data.local.dao.MovieDao
-import com.harloomDeveloper.moviecatalogharloom.data.local.dao.TvDao
 import com.harloomDeveloper.moviecatalogharloom.data.local.database.CatalogDatabase
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
-import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
-class TvRepository (application: Application) : CoroutineScope {
+class MovieRepositoryImp (application: Application) : CoroutineScope , MovieRepository {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    private var mDao: TvDao?
+    private var mDao: MovieDao?
 
     init {
         val db = CatalogDatabase.getDatabase(application)
-        mDao = db?.tvDao()
+        mDao = db?.movieDao()
     }
 
-    fun getTvs() = mDao?.getAll()
-
-    fun setMovie(data: ResultTv) {
-        launch  { setTvBG(data) }
+    override fun getMovies(): LiveData<List<ResultMovie>>? {
+       return mDao?.get()
     }
 
-    private suspend fun setTvBG(data: ResultTv){
-        withContext(Dispatchers.IO){
+    override fun setMovie(model: ResultMovie) {
+        launch  { setMovieBG(model) }
+    }
+
+    override suspend fun setMovieBG(data: ResultMovie) {
+        withContext(Dispatchers.IO) {
             mDao?.set(data)
         }
     }
+
+    override fun delete(model: ResultMovie) {
+         mDao?.delete(model)
+    }
+
+
 }

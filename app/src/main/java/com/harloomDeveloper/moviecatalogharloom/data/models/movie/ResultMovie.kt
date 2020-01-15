@@ -3,11 +3,12 @@ package com.harloomDeveloper.moviecatalogharloom.data.models.movie
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.harloomDeveloper.moviecatalogharloom.data.local.database.CatalogDatabase.Companion.MOVIE_TABLE
+import com.harloomDeveloper.moviecatalogharloom.data.local.database.AppDatabase.Companion.MOVIE_TABLE
 import kotlinx.android.parcel.Parcelize
 
-@Entity(tableName = MOVIE_TABLE)
+
 @Parcelize
 data class ResultMovie(
     @SerializedName("adult")

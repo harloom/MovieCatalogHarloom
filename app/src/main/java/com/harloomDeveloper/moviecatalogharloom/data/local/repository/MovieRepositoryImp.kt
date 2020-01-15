@@ -3,7 +3,8 @@ package com.harloomDeveloper.moviecatalogharloom.data.local.repository
 import android.app.Application
 import androidx.lifecycle.LiveData
 import com.harloomDeveloper.moviecatalogharloom.data.local.dao.MovieDao
-import com.harloomDeveloper.moviecatalogharloom.data.local.database.CatalogDatabase
+import com.harloomDeveloper.moviecatalogharloom.data.local.database.AppDatabase
+import com.harloomDeveloper.moviecatalogharloom.data.local.entity.EMovie
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,28 +17,28 @@ class MovieRepositoryImp (application: Application) : CoroutineScope , MovieRepo
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    private var mDao: MovieDao?
+    private var mDao: MovieDao? =null
 
     init {
-        val db = CatalogDatabase.getDatabase(application)
+        val db = AppDatabase.getDatabase(application)
         mDao = db?.movieDao()
     }
 
-    override fun getMovies(): LiveData<List<ResultMovie>>? {
+    override fun getMovies(): LiveData<List<EMovie>>? {
        return mDao?.get()
     }
 
-    override fun setMovie(model: ResultMovie) {
+    override fun setMovie(model: EMovie) {
         launch  { setMovieBG(model) }
     }
 
-    override suspend fun setMovieBG(data: ResultMovie) {
+    override suspend fun setMovieBG(data: EMovie) {
         withContext(Dispatchers.IO) {
             mDao?.set(data)
         }
     }
 
-    override fun delete(model: ResultMovie) {
+    override fun delete(model: EMovie) {
          mDao?.delete(model)
     }
 

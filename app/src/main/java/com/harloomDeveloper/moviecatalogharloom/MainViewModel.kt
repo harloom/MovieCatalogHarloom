@@ -1,10 +1,13 @@
 package com.harloomDeveloper.moviecatalogharloom
 
 import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.harloomDeveloper.moviecatalogharloom.data.api.NetworkBuilder
+import com.harloomDeveloper.moviecatalogharloom.data.local.entity.EMovie
+import com.harloomDeveloper.moviecatalogharloom.data.local.entity.ETv
 import com.harloomDeveloper.moviecatalogharloom.data.local.repository.MovieRepositoryImp
 import com.harloomDeveloper.moviecatalogharloom.data.local.repository.TvRepositoryImp
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.Movie
@@ -15,7 +18,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 
-class MainViewModel(application: Application) : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
     var api = NetworkBuilder.apiService
     var jobLoaded : CompletableJob? =null
     private var mMovieRepositoryImp: MovieRepositoryImp = MovieRepositoryImp(application)
@@ -26,19 +29,19 @@ class MainViewModel(application: Application) : ViewModel() {
     fun getDataTv() : LiveData<TvShow> = listTv
 
 
-    fun addToFavoritTv(data : ResultTv){
+    fun addToFavoritTv(data : ETv){
         mTvRepositoryImp.setTv(data)
     }
 
-    fun addToFavoritMovie(data : ResultMovie){
+    fun addToFavoritMovie(data : EMovie){
         mMovieRepositoryImp.setMovie(data)
     }
 
-    fun deleteToFavoritTv(data : ResultTv){
+    fun deleteToFavoritTv(data : ETv){
         mTvRepositoryImp.delete(data)
     }
 
-    fun deleteToFavoritMovie(data : ResultMovie){
+    fun deleteToFavoritMovie(data : EMovie){
         mMovieRepositoryImp.delete(data)
     }
 

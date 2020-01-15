@@ -17,6 +17,8 @@ import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.adapter.RcvMovieAdapter
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
 import com.harloomDeveloper.moviecatalogharloom.Utils
+import com.harloomDeveloper.moviecatalogharloom.base.MainModelFactory
+
 import kotlinx.android.synthetic.main.fragment_movie.*
 
 class MovieFragment : Fragment() {
@@ -56,7 +58,7 @@ class MovieFragment : Fragment() {
     private fun init(){
         //initializevieModel
         mRecyclerView = view!!.findViewById(R.id.rcv_movies)
-        vm = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
+        vm = ViewModelProviders.of(activity!! , MainModelFactory(application = activity!!.application)).get(MainViewModel::class.java)
         vm?.setPageMovie(1)
         showLoading(true)
         movieAdapter =

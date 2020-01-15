@@ -1,16 +1,15 @@
 package com.harloomDeveloper.moviecatalogharloom.ui.favorit
 
 import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.harloomDeveloper.moviecatalogharloom.data.local.entity.EMovie
+import com.harloomDeveloper.moviecatalogharloom.data.local.entity.ETv
 import com.harloomDeveloper.moviecatalogharloom.data.local.repository.MovieRepositoryImp
 import com.harloomDeveloper.moviecatalogharloom.data.local.repository.TvRepositoryImp
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
 
-class PageViewModel(application: Application) : ViewModel() {
+class PageViewModel(application: Application) : AndroidViewModel(application) {
 
     private var mMovieRepositoryImp:MovieRepositoryImp = MovieRepositoryImp(application)
     private var mTvRepositoryImp:TvRepositoryImp = TvRepositoryImp(application)
@@ -24,11 +23,11 @@ class PageViewModel(application: Application) : ViewModel() {
         _index.value = index
     }
 
-    fun deleteToFavoritTv(data : ResultTv){
+    fun deleteToFavoritTv(data : ETv){
         mTvRepositoryImp.delete(data)
     }
 
-    fun deleteToFavoritMovie(data : ResultMovie){
+    fun deleteToFavoritMovie(data : EMovie){
         mMovieRepositoryImp.delete(data)
     }
 

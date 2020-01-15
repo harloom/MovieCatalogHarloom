@@ -1,10 +1,9 @@
 package com.harloomDeveloper.moviecatalogharloom.data.local.repository
 
 import android.app.Application
-import com.harloomDeveloper.moviecatalogharloom.data.local.dao.MovieDao
 import com.harloomDeveloper.moviecatalogharloom.data.local.dao.TvDao
-import com.harloomDeveloper.moviecatalogharloom.data.local.database.CatalogDatabase
-import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
+import com.harloomDeveloper.moviecatalogharloom.data.local.database.AppDatabase
+import com.harloomDeveloper.moviecatalogharloom.data.local.entity.ETv
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,11 +12,11 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 class TvRepositoryImp (application: Application) : CoroutineScope ,  TvRepository {
-    override fun delete(model: ResultTv) {
+    override fun delete(model: ETv) {
         mDao?.delete(model)
     }
 
-    override suspend fun setTvBG(data: ResultTv) {
+    override suspend fun setTvBG(data: ETv) {
         withContext(Dispatchers.IO){
             mDao?.set(data)
         }
@@ -25,17 +24,17 @@ class TvRepositoryImp (application: Application) : CoroutineScope ,  TvRepositor
 
     override fun getTv() =  mDao?.getAll()
 
-    override fun setTv(model: ResultTv) {
+    override fun setTv(model: ETv) {
         launch  { setTvBG(model) }
     }
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    private var mDao: TvDao?
+    private var mDao: TvDao? =null
 
     init {
-        val db = CatalogDatabase.getDatabase(application)
+        val db = AppDatabase.getDatabase(application)
         mDao = db?.tvDao()
     }
 

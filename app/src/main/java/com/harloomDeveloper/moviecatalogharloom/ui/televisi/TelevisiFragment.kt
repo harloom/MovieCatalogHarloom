@@ -15,6 +15,7 @@ import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.adapter.RcvTvAdapter
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
 import com.harloomDeveloper.moviecatalogharloom.Utils
+import com.harloomDeveloper.moviecatalogharloom.base.MainModelFactory
 import kotlinx.android.synthetic.main.fragment_tv.*
 
 class TelevisiFragment : Fragment() {
@@ -53,7 +54,8 @@ class TelevisiFragment : Fragment() {
 
     private fun init(){
         mRecyclerView = view!!.findViewById(R.id.rcv_tv)
-        vm = ViewModelProviders.of(activity!!)[MainViewModel::class.java]
+        vm =  ViewModelProviders.of(activity!! , MainModelFactory(application = activity!!.application))
+            .get(MainViewModel::class.java)
         vm?.setPageTv(1)
         showLoading(true)
         mTvadapter = RcvTvAdapter(callbackAdaptet)

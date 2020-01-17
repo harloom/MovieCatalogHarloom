@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.favorit.MyMovieFragment">
 
+    <View
+        android:id="@+id/bacground_indicator"
+        android:visibility="gone"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/undraw_searching_p5ux"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <ProgressBar
         android:id="@+id/loading_indicator"
         android:elevation="0.01dp"

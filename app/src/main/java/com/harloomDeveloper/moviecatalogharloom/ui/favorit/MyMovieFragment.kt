@@ -73,6 +73,8 @@ class MyMovieFragment : Fragment(), RcvFavoritMovieAdapter.Interaction {
             movie?.let {
                 showLoading(false)
                 movieAdapter.submitList(movie)
+                showIndicatorDataNull(movie.isEmpty())
+
             }
 
 
@@ -80,6 +82,14 @@ class MyMovieFragment : Fragment(), RcvFavoritMovieAdapter.Interaction {
 
 
 
+    }
+
+    private  fun showIndicatorDataNull(bool : Boolean){
+        if(bool){
+            bacground_indicator.visibility = View.VISIBLE
+        }else{
+            bacground_indicator.visibility = View.GONE
+        }
     }
     private fun showLoading(st : Boolean){
         if(st){

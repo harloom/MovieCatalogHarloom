@@ -19,6 +19,10 @@ import kotlinx.android.synthetic.main.fragment_favorit.*
  */
 class MyTvFragment : Fragment(), RcvFavoritTvAdapter.Interaction {
     override fun onItemSelected(position: Int, item: ETv) {
+
+    }
+
+    override fun onDeleteTap(position: Int, item: ETv) {
         MaterialDialog(context!!).show {
             title(R.string.title_alert)
             message(R.string.your_message)
@@ -32,10 +36,6 @@ class MyTvFragment : Fragment(), RcvFavoritTvAdapter.Interaction {
                 dialog.dismiss()
             }
         }
-    }
-
-    override fun onDeleteTap(position: Int, item: ETv) {
-
     }
 
     private lateinit var pageViewModel: PageViewModel
@@ -70,11 +70,20 @@ class MyTvFragment : Fragment(), RcvFavoritTvAdapter.Interaction {
         }
         pageViewModel.getTvs()?.observe(this@MyTvFragment, Observer {tv->
                 showLoading(false)
+                showIndicatorDataNull(tv.isEmpty())
                 movieAdapter.submitList(tv)
         })
 
 
 
+    }
+
+    private  fun showIndicatorDataNull(bool : Boolean){
+        if(bool){
+            bacground_indicator.visibility = View.VISIBLE
+        }else{
+            bacground_indicator.visibility = View.GONE
+        }
     }
     private fun showLoading(st : Boolean){
         if(st){

@@ -16,7 +16,6 @@ data class EMovie(
     val adult: Boolean?,
     @ColumnInfo(name = "backdropPath")
     val backdropPath: String?,
-
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
     val id: Int?,

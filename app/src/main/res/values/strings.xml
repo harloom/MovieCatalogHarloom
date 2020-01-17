@@ -33,6 +33,10 @@
     <string name="tab_text_1">Movie</string>
     <string name="tab_text_2">Tv</string>
     <string name="poster">Poster</string>
+    <string name="agree">Yes</string>
+    <string name="disagree">No</string>
+    <string name="title_alert">Are Your Sure?</string>
+    <string name="your_message">Data Cannot Back!</string>
 
 
 </resources>

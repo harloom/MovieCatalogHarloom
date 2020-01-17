@@ -11,10 +11,10 @@ import com.bumptech.glide.Glide
 import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.data.api.Constant
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
-import kotlinx.android.synthetic.main.item_movie.view.*
-import kotlinx.android.synthetic.main.item_movie.view.thumbail
-import kotlinx.android.synthetic.main.item_movie.view.tv_tahun
-import kotlinx.android.synthetic.main.item_movie.view.tv_title
+import com.like.LikeButton
+import com.like.OnLikeListener
+
+
 import kotlinx.android.synthetic.main.item_tv_show.view.*
 
 class RcvTvAdapter(private val interaction: Interaction? = null) :
@@ -75,8 +75,23 @@ class RcvTvAdapter(private val interaction: Interaction? = null) :
 
             }
 
+
             itemView.tv_title.text = item.originalName
             itemView.tv_tahun.text = item.firstAirDate
+            itemView.favorit_button.isLiked = item.isFavorit
+            itemView.favorit_button.setOnLikeListener(object  : OnLikeListener{
+                override fun liked(likeButton: LikeButton?) {
+                    interaction?.onItemLike(item)
+                }
+
+                override fun unLiked(likeButton: LikeButton?) {
+                    interaction?.onItemUnlike(item)
+
+                }
+            })
+
+
+
             try {
                 Glide.with(itemView.context)
                     .load(Constant.BASE_IMAGE + item.posterPath)
@@ -91,8 +106,10 @@ class RcvTvAdapter(private val interaction: Interaction? = null) :
 
     }
 
-    interface Interaction {
+    interface Interaction  {
         fun onItemSelected(position: Int, item: ResultTv)
+       fun onItemLike(item: ResultTv)
+        fun onItemUnlike(item : ResultTv)
     }
 }
 

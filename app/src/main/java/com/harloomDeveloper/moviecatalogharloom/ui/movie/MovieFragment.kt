@@ -18,10 +18,13 @@ import com.harloomDeveloper.moviecatalogharloom.adapter.RcvMovieAdapter
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
 import com.harloomDeveloper.moviecatalogharloom.Utils
 import com.harloomDeveloper.moviecatalogharloom.base.MainModelFactory
+import com.harloomDeveloper.moviecatalogharloom.data.local.entity.EMovie
 
 import kotlinx.android.synthetic.main.fragment_movie.*
 
 class MovieFragment : Fragment() {
+
+
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var movieAdapter: RcvMovieAdapter
     private var vm : MainViewModel? = null
@@ -52,6 +55,9 @@ class MovieFragment : Fragment() {
 
 
         })
+
+
+
     }
 
 
@@ -67,8 +73,26 @@ class MovieFragment : Fragment() {
 
     }
 
+
     private  val   callbackAdaptet : RcvMovieAdapter.Interaction = object :
         RcvMovieAdapter.Interaction {
+        override fun onItemLike(item: ResultMovie) {
+            val movie  = EMovie(id = item.id,title = item.title,adult = item.adult,backdropPath = item.backdropPath,
+                originalLanguage = item.originalLanguage,originalTitle = item.originalTitle,overview = item.overview,
+                popularity = item.popularity,posterPath = item.posterPath,releaseDate = item.releaseDate,
+                video = item.video,
+                voteAverage = item.voteAverage,
+                voteCount = item.voteCount)
+            vm?.addToFavoritMovie(movie)
+        }
+
+        override fun onItemUnlike(item: ResultMovie) {
+            item.id?.let {
+                vm?.deleteByIdMovie(item.id)
+            }
+
+        }
+
         override fun onItemSelected(position: Int, item: ResultMovie) {
             startActivity(getIntentToDetail(context,item))
         }

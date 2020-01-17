@@ -34,5 +34,6 @@ data class ResultTv(
     @SerializedName("vote_average")
     val voteAverage: Double?,
     @SerializedName("vote_count")
-    val voteCount: Int?
+    val voteCount: Int?,
+    var isFavorit : Boolean
 ) : Parcelable

@@ -6,6 +6,7 @@ import com.harloomDeveloper.moviecatalogharloom.data.local.dao.MovieDao
 import com.harloomDeveloper.moviecatalogharloom.data.local.database.AppDatabase
 import com.harloomDeveloper.moviecatalogharloom.data.local.entity.EMovie
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
+import io.reactivex.Single
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,6 +14,13 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 class MovieRepositoryImp (application: Application) : CoroutineScope , MovieRepository {
+    override suspend fun isFavoirt(id: Int): Int? {
+       return  mDao?.isFavorit(id)
+    }
+
+    override suspend fun deleteById(id: Int) {
+        mDao?.deleteById(id)
+    }
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
@@ -28,7 +36,7 @@ class MovieRepositoryImp (application: Application) : CoroutineScope , MovieRepo
        return mDao?.get()
     }
 
-    override fun setMovie(model: EMovie) {
+    override suspend fun setMovie(model: EMovie) {
         launch  { setMovieBG(model) }
     }
 
@@ -38,7 +46,7 @@ class MovieRepositoryImp (application: Application) : CoroutineScope , MovieRepo
         }
     }
 
-    override fun delete(model: EMovie) {
+    override  suspend fun delete(model: EMovie) {
          mDao?.delete(model)
     }
 

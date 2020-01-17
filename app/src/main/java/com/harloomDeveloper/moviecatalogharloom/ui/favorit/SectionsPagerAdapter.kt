@@ -14,23 +14,14 @@ private val TAB_TITLES = arrayOf(
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    override fun getItem(position: Int): Fragment {
-
-        return pages[position]
-
-    }
-
-    private val pages = listOf<Fragment>(
-        MyMovieFragment()
+    override fun getItem(position: Int): Fragment = pages[position]
+    private val pages = listOf(
+        MyMovieFragment(),
+        MyTvFragment()
     )
-
-
 
     override fun getPageTitle(position: Int): CharSequence? {
         return context.resources.getString(TAB_TITLES[position])
     }
-
-    override fun getCount(): Int {
-        return pages.size
-    }
+    override fun getCount(): Int = pages.size
 }

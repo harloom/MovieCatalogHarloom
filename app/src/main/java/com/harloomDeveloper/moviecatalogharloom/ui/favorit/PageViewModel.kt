@@ -8,34 +8,35 @@ import com.harloomDeveloper.moviecatalogharloom.data.local.repository.MovieRepos
 import com.harloomDeveloper.moviecatalogharloom.data.local.repository.TvRepositoryImp
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
+import com.harloomDeveloper.moviecatalogharloom.data.models.tv.TvShow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 class PageViewModel(application: Application) : AndroidViewModel(application) {
-
+    private val scope = CoroutineScope(IO);
     private var mMovieRepositoryImp:MovieRepositoryImp = MovieRepositoryImp(application)
     private var mTvRepositoryImp:TvRepositoryImp = TvRepositoryImp(application)
+//    private val listMovie : MutableLiveData<EMovie> = MutableLiveData()
+//    private val listTv : MutableLiveData<ETv> = MutableLiveData()
 
-    private val _index = MutableLiveData<Int>()
-    val text: LiveData<String> = Transformations.map(_index) {
-        "Hello world from section: $it"
+    fun deleteFromFavoritTv(data : ETv){
+        scope.launch {
+            mTvRepositoryImp.delete(data)
+        }
+
     }
 
-    fun setIndex(index: Int) {
-        _index.value = index
+    fun deleteFromFavoritMovie(data : EMovie){
+        scope.launch {
+            mMovieRepositoryImp.delete(data)
+        }
+
     }
 
-    fun deleteToFavoritTv(data : ETv){
-        mTvRepositoryImp.delete(data)
-    }
-
-    fun deleteToFavoritMovie(data : EMovie){
-        mMovieRepositoryImp.delete(data)
-    }
+    fun getMovies()  = mMovieRepositoryImp.getMovies()
+    fun getTvs() = mTvRepositoryImp.getTv()
 
 
 
-    /**
-     * fungsi qeury live data
-     *
-     *
-     * */
 }

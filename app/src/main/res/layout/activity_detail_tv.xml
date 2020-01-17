@@ -56,13 +56,10 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
         <TextView
             android:id="@+id/dtl_popularity"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:paddingStart="8dp"
             android:paddingTop="8dp"
@@ -71,10 +68,25 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:textColor="@android:color/black"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/dtl_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dtl_thumbail" />
+
+        <com.like.LikeButton
+            android:id="@+id/favorit_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:anim_scale_factor="2"
+            app:icon_size="30dp"
+            app:icon_type="heart"
+            app:layout_constraintBottom_toTopOf="@+id/dtl_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dtl_popularity"
+            app:like_drawable="@drawable/ic_favorite"
+            app:liked="false"
+            app:unlike_drawable="@drawable/ic_favorite_off" />
 
         <TextView
             android:id="@+id/dtl_title"
@@ -93,7 +105,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintBottom_toTopOf="@+id/dtl_release"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dtl_popularity" />
+            app:layout_constraintTop_toBottomOf="@+id/favorit_button" />
 
         <TextView
             android:id="@+id/dtl_release"

@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
+import com.harloomDeveloper.moviecatalogharloom.MainViewModel
 import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.data.api.Constant
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
+import com.like.LikeButton
+import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class RcvMovieAdapter(private val interaction: Interaction? = null) :
+class RcvMovieAdapter(
+    private val interaction: Interaction? = null
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ResultMovie>() {
@@ -59,6 +64,17 @@ class RcvMovieAdapter(private val interaction: Interaction? = null) :
             itemView.tv_title.text = item.title
             itemView.tv_tahun.text = item.releaseDate
 //            itemView.thumbail.setImageResource(item.!!)
+            itemView.favorit_button.isLiked = item.isFavorit
+            itemView.favorit_button.setOnLikeListener(object  : OnLikeListener{
+                override fun liked(likeButton: LikeButton?) {
+                    interaction?.onItemLike(item)
+                }
+
+                override fun unLiked(likeButton: LikeButton?) {
+                    interaction?.onItemUnlike(item)
+
+                }
+            })
             try {
                 Glide.with(context)
                     .load(Constant.BASE_IMAGE+item.posterPath)
@@ -72,6 +88,8 @@ class RcvMovieAdapter(private val interaction: Interaction? = null) :
 
     interface Interaction {
         fun onItemSelected(position: Int, item: ResultMovie)
+        fun onItemLike(item: ResultMovie)
+        fun onItemUnlike(item : ResultMovie)
     }
 }
 

@@ -16,6 +16,9 @@ import com.harloomDeveloper.moviecatalogharloom.adapter.RcvTvAdapter
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
 import com.harloomDeveloper.moviecatalogharloom.Utils
 import com.harloomDeveloper.moviecatalogharloom.base.MainModelFactory
+import com.harloomDeveloper.moviecatalogharloom.data.local.entity.ETv
+import com.like.LikeButton
+import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.fragment_tv.*
 
 class TelevisiFragment : Fragment() {
@@ -61,8 +64,34 @@ class TelevisiFragment : Fragment() {
         mTvadapter = RcvTvAdapter(callbackAdaptet)
     }
 
+
     private  val   callbackAdaptet : RcvTvAdapter.Interaction = object :
         RcvTvAdapter.Interaction {
+        override fun onItemLike(item: ResultTv) {
+            val data = ETv(
+                id = item.id,
+                voteCount = item.voteCount,
+                voteAverage = item.voteAverage,
+                posterPath = item.posterPath,
+                popularity = item.popularity,
+                overview = item.overview,
+                originalName = item.originalName,
+                originalLanguage = item.originalLanguage,
+                backdropPath = item.backdropPath,
+                title = item.name,
+                firstAirDate = item.firstAirDate
+
+
+            )
+            vm?.addToFavoritTv(data);
+        }
+
+        override fun onItemUnlike(item: ResultTv) {
+          item.id?.let {
+              vm?.deleteByIdMTv(item.id)
+          }
+        }
+
         override fun onItemSelected(position: Int, item: ResultTv) {
             startActivity(getIntentToDetail(context,item))
         }

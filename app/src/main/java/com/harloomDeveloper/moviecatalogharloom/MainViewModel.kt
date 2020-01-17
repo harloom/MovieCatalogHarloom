@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
+    private val scope : CoroutineScope = CoroutineScope(IO)
     var api = NetworkBuilder.apiService
     var jobLoaded : CompletableJob? =null
     private var mMovieRepositoryImp: MovieRepositoryImp = MovieRepositoryImp(application)
@@ -30,32 +31,71 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun addToFavoritTv(data : ETv){
-        mTvRepositoryImp.setTv(data)
+        scope.launch {
+            mTvRepositoryImp.setTv(data)
+        }
+
     }
 
     fun addToFavoritMovie(data : EMovie){
-        mMovieRepositoryImp.setMovie(data)
+        scope.launch {
+            mMovieRepositoryImp.setMovie(data)
+        }
+
     }
 
-    fun deleteToFavoritTv(data : ETv){
-        mTvRepositoryImp.delete(data)
+    fun deleteFromFavoritTv(data : ETv){
+        scope.launch {
+            mTvRepositoryImp.delete(data)
+        }
+
     }
 
-    fun deleteToFavoritMovie(data : EMovie){
-        mMovieRepositoryImp.delete(data)
-    }
+    fun deletFromFavoritMovie(data : EMovie){
+        scope.launch {
+            mMovieRepositoryImp.delete(data)
+        }
+        }
 
+
+    fun deleteByIdMovie(id : Int){
+        scope.launch {
+            mMovieRepositoryImp.deleteById(id)
+        }
+
+    }
+    fun deleteByIdMTv(id : Int){
+        scope.launch {
+            mTvRepositoryImp.deleteById(id)
+        }
+
+    }
 
      fun setPageMovie(page : Int) {
+
         jobLoaded = Job()
                 jobLoaded?.let {
                     CoroutineScope(IO + it).launch {
                         val response =   api.getMovie(page)
                         if(response.isSuccessful){
-                            withContext(Main){
-                                 listMovie.value = response.body()
-                                jobLoaded?.complete()
-                            }
+                                 val movie = response.body()
+                                 val jobMap = launch {
+                                    movie?.let { m->
+                                        m.resultMovies.map {resultMovie ->
+                                            val query =   mMovieRepositoryImp.isFavoirt(resultMovie.id!!)
+                                            resultMovie.isFavorit = query !=null && query>0
+                                        }
+                                    }
+                                }
+                                jobMap.invokeOnCompletion {
+                                    CoroutineScope(Main).launch {
+                                        listMovie.value = movie
+                                        jobLoaded?.complete()
+                                    }
+                                }
+
+
+
                         }else{
                             jobLoaded?.cancel()
                             //error handling
@@ -74,10 +114,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     CoroutineScope(IO + it).launch {
                         val response =   api.getTv(page)
                         if(response.isSuccessful){
-                            withContext(Main){
-                                listTv.value = response.body()
-                                jobLoaded?.complete()
+
+                               val tv = response.body()
+                                val jobMap = launch {
+                                    tv?.resultTv?.map {tv->
+                                        val query =   mTvRepositoryImp.isFavoirt(tv.id!!)
+                                        tv.isFavorit = query !=null && query>0
+                                    }
+                                }
+                            jobMap.invokeOnCompletion {
+                                CoroutineScope(Main).launch {
+                                    listTv.value = tv
+                                    jobLoaded?.complete()
+                                }
+
                             }
+
+
                         }else{
                             jobLoaded?.cancel()
                             //error handling
@@ -92,5 +145,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun cancel(){
         jobLoaded?.cancel()
     }
+
+//    override fun onCleared() {
+//        print("ViewModel Clear")
+//        super.onCleared()
+//    }
 
 }

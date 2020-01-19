@@ -79,4 +79,18 @@ interface MovieApi{
     suspend fun getDetailTv(
         @Path("id") id : String
     )
+
+
+    /*
+    Movies: https://api.themoviedb.org/3/search/movie?api_key={API KEY}&language=en-US&query={MOVIE NAME}
+    Tv Show: https://api.themoviedb.org/3/search/tv?api_key={API KEY}&language=en-US&query={TV SHOW NAME}
+
+     */
+
+    @GET("search/movie")
+    suspend fun getSearchMovie(@Query("query") query: String) :retrofit2.Response<Movie>
+
+    @GET("search/tv")
+    suspend fun getSearchTv(@Query("query") query: String) :retrofit2.Response<TvShow>
+
 }

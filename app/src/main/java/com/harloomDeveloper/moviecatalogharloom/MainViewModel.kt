@@ -71,6 +71,75 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
+    fun setSearcMovie(text : String){
+        jobLoaded = Job()
+        jobLoaded?.let {
+            CoroutineScope(IO+it).launch {
+                val response  = api.getSearchMovie(text)
+                if(response.isSuccessful){
+                  val movie  = response.body()
+                    val jobMap = launch {
+                        movie?.let { m->
+                            m.resultMovies.map {resultMovie ->
+                                val query = resultMovie.id?.let { it1 ->
+                                    mMovieRepositoryImp.isFavoirt(
+                                        it1
+                                    )
+                                }
+                                resultMovie.isFavorit = query !=null && query>0
+                            }
+                        }
+                    }
+                    jobMap.invokeOnCompletion {
+                        CoroutineScope(Main).launch {
+                            listMovie.value = movie
+                            jobLoaded?.complete()
+                        }
+                    }
+                }else{
+
+                    jobLoaded?.cancel()
+                }
+            }
+        }
+    }
+
+    fun setSearcTv(text : String){
+        jobLoaded = Job()
+        jobLoaded?.let {
+            CoroutineScope(IO + it).launch {
+                val response =   api.getSearchTv(text)
+                if(response.isSuccessful){
+
+                    val tv = response.body()
+                    val jobMap = launch {
+                        tv?.resultTv?.map {tv->
+                            val query = tv.id?.let {
+                                    it1 -> mTvRepositoryImp.isFavoirt(it1) }
+                            tv.isFavorit = query !=null && query>0
+                        }
+                    }
+                    jobMap.invokeOnCompletion {
+                        CoroutineScope(Main).launch {
+                            listTv.value = tv
+                            jobLoaded?.complete()
+                        }
+
+                    }
+
+
+                }else{
+                    jobLoaded?.cancel()
+                    //error handling
+                }
+
+            }
+        }
+
+
+    }
+
+
      fun setPageMovie(page : Int) {
 
         jobLoaded = Job()
@@ -82,7 +151,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                                  val jobMap = launch {
                                     movie?.let { m->
                                         m.resultMovies.map {resultMovie ->
-                                            val query =   mMovieRepositoryImp.isFavoirt(resultMovie.id!!)
+                                            val query = resultMovie.id?.let { it1 ->
+                                                mMovieRepositoryImp.isFavoirt(
+                                                    it1
+                                                )
+                                            }
                                             resultMovie.isFavorit = query !=null && query>0
                                         }
                                     }
@@ -106,8 +179,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
 
 
-
-
     fun setPageTv(page : Int){
         jobLoaded = Job()
                 jobLoaded?.let {
@@ -118,7 +189,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                                val tv = response.body()
                                 val jobMap = launch {
                                     tv?.resultTv?.map {tv->
-                                        val query =   mTvRepositoryImp.isFavoirt(tv.id!!)
+                                        val query = tv.id?.let { it1 ->
+                                            mTvRepositoryImp.isFavoirt(
+                                                it1
+                                            )
+                                        }
                                         tv.isFavorit = query !=null && query>0
                                     }
                                 }

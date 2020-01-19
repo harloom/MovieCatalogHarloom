@@ -30,4 +30,7 @@
     <string name="disagree">No</string>
     <string name="title_alert">Are Your Sure?</string>
     <string name="your_message">Data Cannot Back!</string>
+    <string name="title_settings_reminder">Settings</string>
+    <string name="search_title">Search</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>

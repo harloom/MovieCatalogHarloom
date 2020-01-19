@@ -67,15 +67,11 @@ class RcvTvAdapter(private val interaction: Interaction? = null) :
         itemView: View,
         private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
-
-        @SuppressLint("SetTextI18n")
         fun bind(item: ResultTv) = with(itemView) {
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
 
             }
-
-
             itemView.tv_title.text = item.originalName
             itemView.tv_tahun.text = item.firstAirDate
             itemView.favorit_button.isLiked = item.isFavorit
@@ -86,11 +82,8 @@ class RcvTvAdapter(private val interaction: Interaction? = null) :
 
                 override fun unLiked(likeButton: LikeButton?) {
                     interaction?.onItemUnlike(item)
-
                 }
             })
-
-
 
             try {
                 Glide.with(itemView.context)

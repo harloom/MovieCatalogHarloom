@@ -59,7 +59,9 @@ class DetailTvShowActivity : AppCompatActivity() {
             }
 
             override fun unLiked(likeButton: LikeButton?) {
-                vm?.deleteByIdMTv(item.id!!)
+                item.id?.let {
+                    vm?.deleteByIdMTv(item.id)
+                }
             }
 
         })

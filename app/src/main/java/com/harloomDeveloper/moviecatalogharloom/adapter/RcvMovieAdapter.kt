@@ -63,7 +63,6 @@ class RcvMovieAdapter(
             }
             itemView.tv_title.text = item.title
             itemView.tv_tahun.text = item.releaseDate
-//            itemView.thumbail.setImageResource(item.!!)
             itemView.favorit_button.isLiked = item.isFavorit
             itemView.favorit_button.setOnLikeListener(object  : OnLikeListener{
                 override fun liked(likeButton: LikeButton?) {

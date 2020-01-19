@@ -23,17 +23,19 @@ class MyTvFragment : Fragment(), RcvFavoritTvAdapter.Interaction {
     }
 
     override fun onDeleteTap(position: Int, item: ETv) {
-        MaterialDialog(context!!).show {
-            title(R.string.title_alert)
-            message(R.string.your_message)
-            cornerRadius(8F)
-            positiveButton(R.string.agree) { dialog ->
-                pageViewModel.deleteFromFavoritTv(item)
-                dialog.dismiss()
-            }
-            negativeButton(R.string.disagree) { dialog ->
-                // Do something
-                dialog.dismiss()
+        context?.let {
+            MaterialDialog(it).show {
+                title(R.string.title_alert)
+                message(R.string.your_message)
+                cornerRadius(8F)
+                positiveButton(R.string.agree) { dialog ->
+                    pageViewModel.deleteFromFavoritTv(item)
+                    dialog.dismiss()
+                }
+                negativeButton(R.string.disagree) { dialog ->
+                    // Do something
+                    dialog.dismiss()
+                }
             }
         }
     }

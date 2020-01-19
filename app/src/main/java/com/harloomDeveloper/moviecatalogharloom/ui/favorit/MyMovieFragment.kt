@@ -19,19 +19,22 @@ import kotlinx.android.synthetic.main.fragment_favorit.*
  */
 class MyMovieFragment : Fragment(), RcvFavoritMovieAdapter.Interaction {
     override fun onDeleteTap(position: Int, item: EMovie) {
-        MaterialDialog(context!!).show {
-            title(R.string.title_alert)
-            message(R.string.your_message)
-            cornerRadius(8F)
-            positiveButton(R.string.agree) { dialog ->
-                pageViewModel.deleteFromFavoritMovie(item)
-                dialog.dismiss()
-            }
-            negativeButton(R.string.disagree) { dialog ->
-                // Do something
-                dialog.dismiss()
+        context?.let {_context->
+            MaterialDialog(_context).show {
+                title(R.string.title_alert)
+                message(R.string.your_message)
+                cornerRadius(8F)
+                positiveButton(R.string.agree) { dialog ->
+                    pageViewModel.deleteFromFavoritMovie(item)
+                    dialog.dismiss()
+                }
+                negativeButton(R.string.disagree) { dialog ->
+                    // Do something
+                    dialog.dismiss()
+                }
             }
         }
+
 
     }
 

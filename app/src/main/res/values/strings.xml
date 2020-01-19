@@ -37,6 +37,25 @@
     <string name="disagree">No</string>
     <string name="title_alert">Are Your Sure?</string>
     <string name="your_message">Data Cannot Back!</string>
+    <string name="title_settings_reminder">Settings</string>
+    <string name="search_title">Search</string>
+    <string name="channel_reminder" translatable="false">reminderChannel</string>
+    <string name="channel_description" translatable="false">ReminderChannel</string>
+    <string name="channel_id_reminder" translatable="false">ID_REMINDER</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="reminder_release" translatable="false">Release Reminder</string>
+    <string name="reminder_daily" translatable="false">Daily Reminder</string>
+
+
+
+    <!-- Sync Preferences -->
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
 
 
 </resources>

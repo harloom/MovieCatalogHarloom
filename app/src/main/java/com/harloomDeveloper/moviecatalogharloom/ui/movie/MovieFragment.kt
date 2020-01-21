@@ -38,35 +38,59 @@ class MovieFragment : Fragment() {
 
     private var jobSearch : Job? =null
     private var querySearch : String?= null
+    private var isExpand : Boolean  =false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        activity?.let {activity->
+            vm = ViewModelProviders.of(activity).get(MainViewModel::class.java)
+
+        }
 
         if (savedInstanceState != null) {
-            val result = savedInstanceState.getString(StateQuerySearch) as String
+            val result = savedInstanceState.getString(StateQuerySearch) as String?
             querySearch = result
+            isExpand  = savedInstanceState.getBoolean("isExpand")
         }
+
+
+        if(cekInitial()){
+            vm?.setPageMovie(1)
+        }
+        setHasOptionsMenu(true)
+    }
+
+    private  fun cekInitial(): Boolean {
+        return !isExpand && querySearch ==null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
+
         inflater.inflate(R.menu.toolbar_menu, menu)
-
         val searchView = SearchView((context as MenuActivity).supportActionBar?.themedContext ?: context)
-
-        menu.findItem(R.id.action_search).apply {
+        val search = menu.findItem(R.id.action_search).apply {
             actionView = searchView
 
-        }.setOnActionExpandListener(object :MenuItem.OnActionExpandListener{
+        }
+
+        if(isExpand && querySearch !=null){
+            search.expandActionView()
+            searchView.setQuery(querySearch,true)
+
+        }
+
+        search.setOnActionExpandListener(object :MenuItem.OnActionExpandListener{
             override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                isExpand = true
                 menu.setGroupVisible(R.id.menu_container,false)
                 return true
             }
 
             override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
                 menu.setGroupVisible(R.id.menu_container,true)
+                isExpand = false
                 activity?.invalidateOptionsMenu()
                 return true
             }
@@ -122,6 +146,7 @@ class MovieFragment : Fragment() {
         super.onSaveInstanceState(outState)
         querySearch?.let {
             outState.putString(Utils.StateQuerySearch, querySearch)
+            outState.putBoolean("isExpand",isExpand)
         }
 
     }
@@ -163,8 +188,6 @@ class MovieFragment : Fragment() {
     private fun init(){
         //initializevieModel
         mRecyclerView = view!!.findViewById(R.id.rcv_movies)
-        vm = ViewModelProviders.of(activity!! ).get(MainViewModel::class.java)
-        vm?.setPageMovie(1)
         showLoading(true)
         movieAdapter =
             RcvMovieAdapter(callbackAdaptet)
@@ -214,12 +237,10 @@ class MovieFragment : Fragment() {
         }
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(context, "landscape", Toast.LENGTH_SHORT).show()
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            Toast.makeText(context, "portrait", Toast.LENGTH_SHORT).show()
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isExpand = false
+        querySearch =null
+
     }
 }

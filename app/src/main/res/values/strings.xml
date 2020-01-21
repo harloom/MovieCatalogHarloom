@@ -37,7 +37,7 @@
     <string name="disagree">No</string>
     <string name="title_alert">Are Your Sure?</string>
     <string name="your_message">Data Cannot Back!</string>
-    <string name="title_settings_reminder">Settings</string>
+    <string name="title_settings_reminder">Settings Reminder</string>
     <string name="search_title">Search</string>
     <string name="channel_reminder" translatable="false">reminderChannel</string>
     <string name="channel_description" translatable="false">ReminderChannel</string>
@@ -45,17 +45,14 @@
     <string name="title_activity_settings">Settings</string>
 
     <!-- Preference Titles -->
-    <string name="reminder_release" translatable="false">Release Reminder</string>
-    <string name="reminder_daily" translatable="false">Daily Reminder</string>
-
-
-
-    <!-- Sync Preferences -->
-    <string name="sync_title" translatable="false">Sync email periodically</string>
-    <string name="attachment_title" translatable="false">Download incoming attachments</string>
-    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+    <string name="reminder_release">New Release Reminder</string>
+    <string name="reminder_daily">Daily Reminder</string>
+    <string name="release_summary_off" translatable="false">Reminder Release Movie Today</string>
+    <string name="release_summary_on" translatable="false">Reminder Release Today</string>
+    <string name="daily_summary_off" translatable="false">Reminder for retrun App</string>
+    <string name="daily_summary_on" translatable="false">Reminder for retrun App On</string>
+    <string name="key_release_today" translatable="false">release_today</string>
+    <string name="key_daily" translatable="false">daily</string>
 
 
 </resources>

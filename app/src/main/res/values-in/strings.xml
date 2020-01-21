@@ -30,7 +30,9 @@
     <string name="disagree">No</string>
     <string name="title_alert">Apakah Yakin?</string>
     <string name="your_message">Data tidak bisa dikembalikan!</string>
-    <string name="title_settings_reminder">Settings</string>
+    <string name="title_settings_reminder">Pengaturan Pemberitahuan</string>
     <string name="search_title">Pencarian</string>
     <string name="title_activity_settings">Pengaturan</string>
+    <string name="reminder_daily" translatable="false">Pemberitahuan Harian</string>
+    <string name="reminder_release" translatable="false">Pemberitahuan Film Terbaru</string>
 </resources>

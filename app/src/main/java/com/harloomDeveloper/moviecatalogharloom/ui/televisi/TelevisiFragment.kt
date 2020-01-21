@@ -19,6 +19,7 @@ import com.harloomDeveloper.moviecatalogharloom.R
 import com.harloomDeveloper.moviecatalogharloom.adapter.RcvTvAdapter
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
 import com.harloomDeveloper.moviecatalogharloom.Utils
+import com.harloomDeveloper.moviecatalogharloom.Utils.StateQuerySearch
 import com.harloomDeveloper.moviecatalogharloom.data.local.entity.ETv
 import com.harloomDeveloper.moviecatalogharloom.ui.preference.SettingsActivity
 import com.like.LikeButton
@@ -36,27 +37,62 @@ class TelevisiFragment : Fragment() {
     private lateinit var mTvadapter: RcvTvAdapter
     private var vm : MainViewModel? =null
     private var jobSearch : Job? =null
+    private var querySearch : String?= null
+    private var isExpand : Boolean  =false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activity?.let { activity->
+            vm =  ViewModelProviders.of(activity!!)
+                .get(MainViewModel::class.java)
+        }
+
+
+        if (savedInstanceState != null) {
+            val result = savedInstanceState.getString(StateQuerySearch) as String?
+            querySearch = result
+            isExpand  = savedInstanceState.getBoolean("isExpand")
+        }
+
+        if(cekInitial()){
+            vm?.setPageTv(1)
+        }
+
+
         setHasOptionsMenu(true)
+    }
+
+
+    private  fun cekInitial(): Boolean {
+        return !isExpand && querySearch ==null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
+
+
         inflater.inflate(R.menu.toolbar_menu, menu)
         val searchView = SearchView((context as MenuActivity).supportActionBar?.themedContext ?: context)
 
-        menu.findItem(R.id.action_search).apply {
+        val search = menu.findItem(R.id.action_search).apply {
             actionView = searchView
-        }.setOnActionExpandListener(object :MenuItem.OnActionExpandListener{
+        }
+        if(isExpand && querySearch !=null){
+            search.expandActionView()
+            searchView.setQuery(querySearch,true)
+
+        }
+
+        search.setOnActionExpandListener(object :MenuItem.OnActionExpandListener{
             override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
                 menu.setGroupVisible(R.id.menu_container,false)
+                isExpand = true
                 return true
             }
 
             override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
                 menu.setGroupVisible(R.id.menu_container,true)
+                isExpand = false
                 activity?.invalidateOptionsMenu()
                 return true
             }
@@ -75,6 +111,7 @@ class TelevisiFragment : Fragment() {
                     jobSearch = CoroutineScope(Main).launch {
                         delay(300)
                         showLoading(true)
+                        querySearch = newText
                         vm?.setSearcTv(newText)
                     }
 
@@ -106,6 +143,15 @@ class TelevisiFragment : Fragment() {
     }
 
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        querySearch?.let {
+            outState.putString(Utils.StateQuerySearch, querySearch)
+            outState.putBoolean("isExpand",isExpand)
+        }
+
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -125,7 +171,6 @@ class TelevisiFragment : Fragment() {
         mRecyclerView.apply {
             adapter = mTvadapter
         }
-
         vm?.getDataTv()?.observe(this@TelevisiFragment, Observer {
             it?.let {
                 showLoading(false)
@@ -138,9 +183,6 @@ class TelevisiFragment : Fragment() {
 
     private fun init(){
         mRecyclerView = view!!.findViewById(R.id.rcv_tv)
-        vm =  ViewModelProviders.of(activity!!)
-            .get(MainViewModel::class.java)
-        vm?.setPageTv(1)
         showLoading(true)
         mTvadapter = RcvTvAdapter(callbackAdaptet)
     }
@@ -191,5 +233,12 @@ class TelevisiFragment : Fragment() {
         }else{
             loading_indicator.visibility = View.GONE
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isExpand = false
+        querySearch =null
+
     }
 }

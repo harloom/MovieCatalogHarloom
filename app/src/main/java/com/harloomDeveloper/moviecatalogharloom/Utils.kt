@@ -24,6 +24,8 @@ object Utils {
          val importance = NotificationManager.IMPORTANCE_HIGH
          val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
             description = descriptionText
+             enableVibration(true)
+             vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
          }
          // Register the channel with the system
          val notificationManager: NotificationManager =
@@ -33,11 +35,6 @@ object Utils {
    }
 
 
-    fun setRepeatingReminderDaily(context: Context){
-        val DAILY = context.resources.getString(R.string.key_daily)
-        val preference = PreferenceManager.getDefaultSharedPreferences(context);
-        val reminderDaily = preference.getBoolean(DAILY,false)
-    }
 
 
 

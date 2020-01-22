@@ -93,4 +93,18 @@ interface MovieApi{
     @GET("search/tv")
     suspend fun getSearchTv(@Query("query") query: String) :retrofit2.Response<TvShow>
 
+    /*
+    https://api.themoviedb.org/3/discover/movie?
+    api_key={API KEY}&primary_release_date.gte={TODAY DATE}&primary_release_date.lte={TODAY DATE}
+     */
+
+
+    @GET("discover/movie")
+    suspend fun discoverMovie(@Query("primary_release_date.gte") dateGte: String ,
+                              @Query("primary_release_date.lte") dateLte: String) : retrofit2.Response<Movie>
+
+    @GET("discover/tv")
+    suspend fun discoverTv(@Query("primary_release_date.gte") dateGte: String ,
+                              @Query("primary_release_date.lte") dateLte: String)
+
 }

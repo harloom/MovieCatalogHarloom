@@ -16,9 +16,19 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <receiver android:name=".ui.widget.MyMovie">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_movie_info" />
+        </receiver>
+
         <activity
             android:name=".ui.preference.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity android:name=".ui.favorit.DetailFavorit" />
         <activity
             android:name=".ui.favorit.FavoritActivity"
@@ -34,6 +44,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.televisi.DetailTvShowActivity" />
+
+        <receiver
+            android:name=".utils.ReminderReciver"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

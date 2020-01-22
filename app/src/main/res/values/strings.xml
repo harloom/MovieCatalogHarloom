@@ -42,6 +42,8 @@
     <string name="channel_reminder" translatable="false">reminderChannel</string>
     <string name="channel_description" translatable="false">ReminderChannel</string>
     <string name="channel_id_reminder" translatable="false">ID_REMINDER</string>
+    <string name="channel_id_release" translatable="false">ID_ReleaseToday</string>
+    <string name="channel_release" translatable="false">ReleaseChannel</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Preference Titles -->
@@ -53,6 +55,9 @@
     <string name="daily_summary_on" translatable="false">Reminder for retrun App On</string>
     <string name="key_release_today" translatable="false">release_today</string>
     <string name="key_daily" translatable="false">daily</string>
+    <string name="appwidget_text" translatable="false">EXAMPLE</string>
+    <string name="add_widget" translatable="false">Add widget</string>
+    <string name="empty_text" translatable="false">Empty</string>
 
 
 </resources>

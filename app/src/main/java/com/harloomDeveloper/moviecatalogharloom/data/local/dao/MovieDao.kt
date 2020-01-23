@@ -17,6 +17,11 @@ interface MovieDao {
     @Query("SELECT * from movie_table ORDER BY originalTitle ASC")
     fun get() : LiveData<List<EMovie>>
 
+
+    @Query("SELECT * from movie_table ORDER BY originalTitle ASC")
+    suspend fun getForWidget() : List<EMovie>
+
+
     @Query("DELETE FROM movie_table")
     suspend fun deleteAll()
 

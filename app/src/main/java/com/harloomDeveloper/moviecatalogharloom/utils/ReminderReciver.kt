@@ -118,7 +118,6 @@ class ReminderReciver : BroadcastReceiver() {
         val intent = Intent(context, ReminderReciver::class.java)
         intent.putExtra(EXTRA_MESSAGE, message)
         intent.putExtra(EXTRA_TYPE, type)
-
         /* alarm 8:00 AM */
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY,8)

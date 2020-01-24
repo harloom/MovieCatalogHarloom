@@ -58,6 +58,7 @@
     <string name="appwidget_text" translatable="false">EXAMPLE</string>
     <string name="add_widget" translatable="false">Add widget</string>
     <string name="empty_text" translatable="false">Empty</string>
+    <string name="appwigetText">Movie Favorit</string>
 
 
 </resources>

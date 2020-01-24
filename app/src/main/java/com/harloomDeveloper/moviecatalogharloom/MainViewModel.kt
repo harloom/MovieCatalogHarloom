@@ -1,19 +1,20 @@
 package com.harloomDeveloper.moviecatalogharloom
 
 import android.app.Application
+import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.harloomDeveloper.moviecatalogharloom.data.api.NetworkBuilder
 import com.harloomDeveloper.moviecatalogharloom.data.local.entity.EMovie
 import com.harloomDeveloper.moviecatalogharloom.data.local.entity.ETv
 import com.harloomDeveloper.moviecatalogharloom.data.local.repository.MovieRepositoryImp
 import com.harloomDeveloper.moviecatalogharloom.data.local.repository.TvRepositoryImp
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.Movie
-import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
-import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.TvShow
+import com.harloomDeveloper.moviecatalogharloom.widgets.BannerWidget
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -26,6 +27,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var mTvRepositoryImp: TvRepositoryImp = TvRepositoryImp(application)
     private val listMovie : MutableLiveData<Movie> = MutableLiveData()
     private val listTv : MutableLiveData<TvShow> = MutableLiveData()
+    private val mContext = application.baseContext
     fun getDataMovie() : LiveData<Movie> =  listMovie
     fun getDataTv() : LiveData<TvShow> = listTv
 
@@ -40,6 +42,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun addToFavoritMovie(data : EMovie){
         scope.launch {
             mMovieRepositoryImp.setMovie(data)
+            BannerWidget.refress(mContext)
         }
 
     }
@@ -47,6 +50,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteFromFavoritTv(data : ETv){
         scope.launch {
             mTvRepositoryImp.delete(data)
+
         }
 
     }
@@ -54,13 +58,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun deletFromFavoritMovie(data : EMovie){
         scope.launch {
             mMovieRepositoryImp.delete(data)
-        }
+
+         }
         }
 
 
     fun deleteByIdMovie(id : Int){
         scope.launch {
             mMovieRepositoryImp.deleteById(id)
+            BannerWidget.refress(mContext)
         }
 
     }

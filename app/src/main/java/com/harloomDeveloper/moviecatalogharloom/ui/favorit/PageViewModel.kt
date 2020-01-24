@@ -9,6 +9,7 @@ import com.harloomDeveloper.moviecatalogharloom.data.local.repository.TvReposito
 import com.harloomDeveloper.moviecatalogharloom.data.models.movie.ResultMovie
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.ResultTv
 import com.harloomDeveloper.moviecatalogharloom.data.models.tv.TvShow
+import com.harloomDeveloper.moviecatalogharloom.widgets.BannerWidget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ class PageViewModel(application: Application) : AndroidViewModel(application) {
     private val scope = CoroutineScope(IO);
     private var mMovieRepositoryImp:MovieRepositoryImp = MovieRepositoryImp(application)
     private var mTvRepositoryImp:TvRepositoryImp = TvRepositoryImp(application)
+    private val mContext = application.baseContext
 //    private val listMovie : MutableLiveData<EMovie> = MutableLiveData()
 //    private val listTv : MutableLiveData<ETv> = MutableLiveData()
 
@@ -30,6 +32,7 @@ class PageViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteFromFavoritMovie(data : EMovie){
         scope.launch {
             mMovieRepositoryImp.delete(data)
+            BannerWidget.refress(mContext)
         }
 
     }

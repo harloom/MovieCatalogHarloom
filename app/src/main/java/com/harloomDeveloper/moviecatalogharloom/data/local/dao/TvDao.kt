@@ -1,5 +1,6 @@
 package com.harloomDeveloper.moviecatalogharloom.data.local.dao
 
+import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.harloomDeveloper.moviecatalogharloom.data.local.entity.ETv
@@ -17,6 +18,9 @@ interface TvDao {
 
     @Query("SELECT * from tv_table ORDER BY originalName ASC")
     fun getAll() : LiveData<List<ETv>>
+
+    @Query("SELECT * from movie_table")
+    fun provider() : Cursor
 
     @Query("DELETE FROM tv_table")
     fun deleteAll()

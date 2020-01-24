@@ -1,5 +1,6 @@
 package com.harloomDeveloper.moviecatalogharloom.data.local.dao
 
+import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.harloomDeveloper.moviecatalogharloom.data.local.entity.EMovie
@@ -17,9 +18,11 @@ interface MovieDao {
     @Query("SELECT * from movie_table ORDER BY originalTitle ASC")
     fun get() : LiveData<List<EMovie>>
 
+    @Query("SELECT * from movie_table")
+    fun provider() : Cursor
 
     @Query("SELECT * from movie_table ORDER BY originalTitle ASC")
-    suspend fun getForWidget() : List<EMovie>
+    fun getForWidget() : List<EMovie>
 
 
     @Query("DELETE FROM movie_table")

@@ -19,7 +19,7 @@ interface TvDao {
     @Query("SELECT * from tv_table ORDER BY originalName ASC")
     fun getAll() : LiveData<List<ETv>>
 
-    @Query("SELECT * from movie_table")
+    @Query("SELECT * from tv_table")
     fun provider() : Cursor
 
     @Query("DELETE FROM tv_table")

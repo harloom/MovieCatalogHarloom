@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <permission android:name="com.harloomDeveloper.moviecatalogharloom.READ_DATABASE" android:protectionLevel="normal" />
-<!--    <permission android:name="com.harloomDeveloper.moviecatalogharloom.WRITE_DATABASE" android:protectionLevel="normal" />-->
+    <permission android:name="com.harloomDeveloper.moviecatalogharloom.WRITE_DATABASE" android:protectionLevel="normal" />
     <application
         android:name=".MainApp"
         android:allowBackup="true"
@@ -30,8 +30,7 @@
         <provider
             android:name=".data.local.provider.FavoritProvider"
             android:authorities="com.harloomDeveloper.moviecatalogharloom"
-            android:readPermission="com.dicoding.mynotesapp.READ_DATABASE"
-            android:enabled="true"
+            android:readPermission="com.harloomDeveloper.moviecatalogharloom.READ_DATABASE"
             android:exported="true" />
 
         <activity

@@ -14,7 +14,7 @@ class FavoritProvider : ContentProvider() {
 
     companion object{
         const val AUTHORITY = "com.harloomDeveloper.moviecatalogharloom"
-        private val BASE_PATH = "favorit"
+        private val BASE_PATH = "favorite"
         private const val MovieFavorite = 1
         private const val TvFavorite = 2
     }
@@ -44,9 +44,10 @@ class FavoritProvider : ContentProvider() {
     ): Cursor? {
         val cursor: Cursor?
         val code = uriMatcher.match(uri)
+      println("ilham : $code")
         cursor = when (code) {
             MovieFavorite -> mDatabase?.movieDao()?.provider()
-            TvFavorite -> mDatabase?.movieDao()?.provider()
+            TvFavorite -> mDatabase?.tvDao()?.provider()
             else -> null
         }
 

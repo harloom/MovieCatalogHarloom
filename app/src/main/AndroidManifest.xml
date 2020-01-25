@@ -4,7 +4,8 @@
     package="com.harloomDeveloper.moviecatalogharloom">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <permission android:name="com.harloomDeveloper.moviecatalogharloom.READ_DATABASE" android:protectionLevel="normal" />
+    <permission android:name="com.harloomDeveloper.moviecatalogharloom.WRITE_DATABASE" android:protectionLevel="normal" />
     <application
         android:name=".MainApp"
         android:allowBackup="true"

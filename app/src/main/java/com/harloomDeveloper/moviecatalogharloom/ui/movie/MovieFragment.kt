@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.harloomDeveloper.moviecatalogharloom.MainViewModel
@@ -29,7 +30,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MovieFragment : Fragment() {
+class MovieFragment : Fragment(R.layout.fragment_movie) {
 
 
     private lateinit var mRecyclerView: RecyclerView
@@ -43,7 +44,7 @@ class MovieFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.let {activity->
-            vm = ViewModelProviders.of(activity).get(MainViewModel::class.java)
+            vm = ViewModelProvider(activity).get(MainViewModel::class.java)
 
         }
 
@@ -145,7 +146,7 @@ class MovieFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         querySearch?.let {
-            outState.putString(Utils.StateQuerySearch, querySearch)
+            outState.putString(StateQuerySearch, querySearch)
             outState.putBoolean("isExpand",isExpand)
         }
 
@@ -153,13 +154,6 @@ class MovieFragment : Fragment() {
 
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_movie, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

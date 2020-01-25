@@ -1,12 +1,10 @@
 package com.harloomDeveloper.moviecatalogharloom.ui.favorit
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.harloomDeveloper.moviecatalogharloom.R
@@ -17,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_favorit.*
 /**
  * A placeholder fragment containing a simple view.
  */
-class MyTvFragment : Fragment(), RcvFavoritTvAdapter.Interaction {
+class MyTvFragment : Fragment(R.layout.fragment_favorit), RcvFavoritTvAdapter.Interaction {
     override fun onItemSelected(position: Int, item: ETv) {
 
     }
@@ -45,23 +43,22 @@ class MyTvFragment : Fragment(), RcvFavoritTvAdapter.Interaction {
     private lateinit var movieAdapter: RcvFavoritTvAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initVm()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_favorit, container, false)
-    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showLoading(true)
-        initVm()
+
         initRcv()
     }
 
     private fun initVm() {
-        pageViewModel = ViewModelProviders.of(activity!!).get(PageViewModel::class.java)
+        activity?.let {activity->
+            pageViewModel = ViewModelProvider(activity).get(PageViewModel::class.java)
+        }
+
 
     }
     private fun initRcv() {
@@ -70,7 +67,7 @@ class MyTvFragment : Fragment(), RcvFavoritTvAdapter.Interaction {
         mRecyclerView.apply {
             adapter = movieAdapter
         }
-        pageViewModel.getTvs()?.observe(this@MyTvFragment, Observer {tv->
+        pageViewModel.getTvs()?.observe(viewLifecycleOwner, Observer {tv->
                 showLoading(false)
                 showIndicatorDataNull(tv.isEmpty())
                 movieAdapter.submitList(tv)

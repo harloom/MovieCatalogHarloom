@@ -79,13 +79,6 @@ class DetailTvShowActivity : AppCompatActivity() {
         }
     }
 
-//    private fun  getGenre (item: ResultTv): String {
-//        var genre : String= ""
-//            item.genreIds?.forEach {
-//                genre += " $it,"
-//            }
-//        return genre.dropLast(1)
-//    }
 
     override fun onSupportNavigateUp(): Boolean {
         finish()

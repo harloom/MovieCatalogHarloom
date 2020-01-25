@@ -24,7 +24,6 @@ class DataSourceMovie{
     private  val  movies : MutableList<ExampleMoviesMovies> = mutableListOf()
 
     fun getListMovide() : List<ExampleMoviesMovies>{
-        //1
         movies.add(ExampleMoviesMovies(
             id = "#1",
             title = "Venom ",

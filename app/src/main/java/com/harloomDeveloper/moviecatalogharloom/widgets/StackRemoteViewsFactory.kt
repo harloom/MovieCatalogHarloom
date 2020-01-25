@@ -49,11 +49,6 @@ class StackRemoteViewsFactory(private val mContext: Context): RemoteViewsService
             }catch (e : Exception){
                 e.printStackTrace()
             }
-//        mWidgetItems.add(BitmapFactory.decodeResource(mContext.resources, R.drawable.fate))
-//        mWidgetItems.add(BitmapFactory.decodeResource(mContext.resources, R.drawable.drstone))
-//        mWidgetItems.add(BitmapFactory.decodeResource(mContext.resources, R.drawable.fgo))
-//        mWidgetItems.add(BitmapFactory.decodeResource(mContext.resources, R.drawable.poster_bumblebee))
-//        mWidgetItems.add(BitmapFactory.decodeResource(mContext.resources, R.drawable.poster_robinhood))
 
     }
 

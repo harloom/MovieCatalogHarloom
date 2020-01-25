@@ -19,8 +19,7 @@ class PageViewModel(application: Application) : AndroidViewModel(application) {
     private var mMovieRepositoryImp:MovieRepositoryImp = MovieRepositoryImp(application)
     private var mTvRepositoryImp:TvRepositoryImp = TvRepositoryImp(application)
     private val mContext = application.baseContext
-//    private val listMovie : MutableLiveData<EMovie> = MutableLiveData()
-//    private val listTv : MutableLiveData<ETv> = MutableLiveData()
+
 
     fun deleteFromFavoritTv(data : ETv){
         scope.launch {

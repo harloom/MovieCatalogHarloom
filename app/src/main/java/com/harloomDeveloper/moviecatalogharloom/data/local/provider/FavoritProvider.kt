@@ -15,6 +15,8 @@ class FavoritProvider : ContentProvider() {
     companion object{
         const val AUTHORITY = "com.harloomDeveloper.moviecatalogharloom"
         private val BASE_PATH = "favorite"
+        private val MOVIE_PATH = "movie"
+        private val TV_PATH = "tv"
         private const val MovieFavorite = 1
         private const val TvFavorite = 2
     }
@@ -23,8 +25,8 @@ class FavoritProvider : ContentProvider() {
     init{
 
 
-        uriMatcher.addURI(AUTHORITY, "$BASE_PATH/#", MovieFavorite)
-        uriMatcher.addURI(AUTHORITY, "$BASE_PATH/#", TvFavorite)
+        uriMatcher.addURI(AUTHORITY, "$BASE_PATH/$MOVIE_PATH", MovieFavorite)
+        uriMatcher.addURI(AUTHORITY, "$BASE_PATH/$TV_PATH", TvFavorite)
     }
 
 
@@ -44,7 +46,6 @@ class FavoritProvider : ContentProvider() {
     ): Cursor? {
         val cursor: Cursor?
         val code = uriMatcher.match(uri)
-      println("ilham : $code")
         cursor = when (code) {
             MovieFavorite -> mDatabase?.movieDao()?.provider()
             TvFavorite -> mDatabase?.tvDao()?.provider()

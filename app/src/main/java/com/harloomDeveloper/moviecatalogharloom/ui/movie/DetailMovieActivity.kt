@@ -77,9 +77,6 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-//        data?.let {
-//            outState.putParcelable(Utils.KEY_STATE_ITEM,data)
-//        }
         super.onSaveInstanceState(outState)
     }
 

@@ -227,9 +227,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         jobLoaded?.cancel()
     }
 
-//    override fun onCleared() {
-//        print("ViewModel Clear")
-//        super.onCleared()
-//    }
 
 }

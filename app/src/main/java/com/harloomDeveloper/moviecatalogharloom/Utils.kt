@@ -5,9 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
-import android.provider.Settings.Global.getString
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.preference.PreferenceManager
+
 
 object Utils {
    const val  KEY_MOVIE ="moviesIntent"

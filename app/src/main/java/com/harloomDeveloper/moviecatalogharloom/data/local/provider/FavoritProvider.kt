@@ -21,7 +21,10 @@ class FavoritProvider : ContentProvider() {
 
 
     init{
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, MovieFavorite)
+
+
+        uriMatcher.addURI(AUTHORITY, "$BASE_PATH/#", MovieFavorite)
+        uriMatcher.addURI(AUTHORITY, "$BASE_PATH/#", TvFavorite)
     }
 
 

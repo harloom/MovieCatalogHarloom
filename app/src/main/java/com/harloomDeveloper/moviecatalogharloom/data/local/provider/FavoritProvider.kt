@@ -8,22 +8,23 @@ import android.net.Uri
 import com.harloomDeveloper.moviecatalogharloom.data.local.database.AppDatabase
 
 class FavoritProvider : ContentProvider() {
-    override fun insert(p0: Uri, p1: ContentValues?): Uri? {
-        return null
-    }
-
-    override fun delete(p0: Uri, p1: String?, p2: Array<out String>?): Int {
-        return 0
-    }
-
-    override fun getType(p0: Uri): String? {
-        return null
-    }
 
     private  var mDatabase: AppDatabase? =null
-    private val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH)
-    private  val MovieFavorit = 1;
-    private val TvFavorit = 2
+    private val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
+
+    companion object{
+        const val AUTHORITY = "com.harloomDeveloper.moviecatalogharloom"
+        private val BASE_PATH = "favorit"
+        private  val MovieFavorit = 1;
+        private val TvFavorit = 2
+    }
+
+
+    init{
+        uriMatcher.addURI(AUTHORITY, BASE_PATH, MovieFavorit)
+    }
+
+
 
 
     override fun onCreate(): Boolean {
@@ -39,7 +40,7 @@ class FavoritProvider : ContentProvider() {
         selectionArgs: Array<String>?, sortOrder: String?
     ): Cursor? {
         val cursor: Cursor?
-        val code = sUriMatcher.match(uri)
+        val code = uriMatcher.match(uri)
         cursor = when (code) {
             MovieFavorit -> mDatabase?.movieDao()?.provider()
             TvFavorit -> mDatabase?.movieDao()?.provider()
@@ -55,4 +56,19 @@ class FavoritProvider : ContentProvider() {
     ): Int {
         return 0
     }
+
+
+
+    override fun insert(p0: Uri, p1: ContentValues?): Uri? {
+        return null
+    }
+
+    override fun delete(p0: Uri, p1: String?, p2: Array<out String>?): Int {
+        return 0
+    }
+
+    override fun getType(p0: Uri): String? {
+        return null
+    }
+
 }

@@ -124,7 +124,7 @@ class ReminderReciver : BroadcastReceiver() {
         val pendingIntent = PendingIntent.getBroadcast(context, ID_RELEASE, intent, 0)
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
 //        alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.timeInMillis,pendingIntent)
-        Toast.makeText(context, "Repeating RepeatinRelease", Toast.LENGTH_LONG).show()
+//        Toast.makeText(context, "Repeating RepeatinRelease", Toast.LENGTH_LONG).show()
 
     }
 
@@ -139,7 +139,7 @@ class ReminderReciver : BroadcastReceiver() {
         calendar.set(Calendar.HOUR_OF_DAY,7 )
         val pendingIntent = PendingIntent.getBroadcast(context, ID_DAILY, intent, 0)
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
-        Toast.makeText(context, "Repeating alarm Daily", Toast.LENGTH_LONG).show()
+//        Toast.makeText(context, "Repeating alarm Daily", Toast.LENGTH_LONG).show()
 
     }
 
